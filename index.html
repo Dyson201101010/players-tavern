@@ -3,113 +3,339 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>遊戲吧 Players’ Tavern！ | 歡迎加入</title>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700&display=swap" rel="stylesheet">
-    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <title>遊戲吧 Players’ Tavern！ | BETA 遊戲社群</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;700;900&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary-color: #5865F2; /* Discord 藍 */
-            --bg-dark: #23272a;
-            --card-bg: #2c2f33;
+            --discord-blue: #5865F2;
+            --mc-green: #3ba55c;
+            --ticket-red: #ed4245;
+            --glow-color: rgba(88, 101, 242, 0.5);
+            --bg-gradient: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
             --text-color: #ffffff;
+            --card-bg: rgba(255, 255, 255, 0.03);
+            --transition-speed: 0.6s;
         }
 
-        body {
+        /* 淺色主題：白色漸變 */
+        body.light-theme {
+            --bg-gradient: linear-gradient(135deg, #f0f2f5 0%, #ffffff 100%);
+            --text-color: #1a1a1a;
+            --card-bg: rgba(0, 0, 0, 0.04);
+            --glow-color: rgba(0, 0, 0, 0.1);
+        }
+
+        body, html {
+            margin: 0; padding: 0; min-height: 100vh; width: 100%;
             font-family: 'Noto Sans TC', sans-serif;
-            background-color: var(--bg-dark);
             color: var(--text-color);
-            margin: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            line-height: 1.6;
+            background: var(--bg-gradient);
+            background-attachment: fixed;
+            /* 背景顏色切換動畫 */
+            transition: background 1s ease-in-out, color 0.5s ease;
+            overflow-x: hidden;
         }
 
-        .container {
-            width: 90%;
-            max-width: 600px;
-            background: var(--card-bg);
-            padding: 40px;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-            text-align: center;
-            border-top: 5px solid var(--primary-color);
+        /* 導航列 */
+        nav {
+            position: fixed; top: 0; width: 100%; height: 80px;
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 0 5%; box-sizing: border-box;
+            background: rgba(0,0,0,0.15); backdrop-filter: blur(20px);
+            z-index: 1000; border-bottom: 1px solid rgba(255,255,255,0.05);
         }
 
-        h1 { font-size: 2.5rem; margin-bottom: 10px; color: var(--primary-color); }
-        .welcome-msg { font-size: 1.1rem; color: #b9bbbe; margin-bottom: 30px; }
-
-        .features {
-            text-align: left;
-            background: rgba(0,0,0,0.2);
-            padding: 20px;
-            border-radius: 10px;
-            margin-bottom: 30px;
+        .logo-box { display: flex; align-items: center; gap: 12px; cursor: pointer; }
+        .beta-badge {
+            background: var(--discord-blue); color: white; padding: 2px 8px;
+            border-radius: 4px; font-size: 0.7rem; font-weight: 900;
+            animation: pulseGlow 2s infinite;
         }
 
-        .features ul { list-style: none; padding: 0; }
-        .features li { margin: 10px 0; padding-left: 25px; position: relative; }
-        .features li::before { content: "🎮"; position: absolute; left: 0; }
-
-        .rules {
-            font-size: 0.9rem;
-            color: #faa61a;
-            border: 1px dashed #faa61a;
-            padding: 15px;
-            border-radius: 8px;
-            margin-bottom: 30px;
+        @keyframes pulseGlow {
+            0% { box-shadow: 0 0 0 0 rgba(88, 101, 242, 0.7); }
+            70% { box-shadow: 0 0 0 10px rgba(88, 101, 242, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(88, 101, 242, 0); }
         }
 
-        .join-btn {
-            display: inline-block;
-            background-color: var(--primary-color);
-            color: white;
-            padding: 15px 40px;
-            font-size: 1.2rem;
-            font-weight: bold;
-            text-decoration: none;
-            border-radius: 30px;
-            transition: 0.3s transform, 0.3s background;
+        .nav-right { display: flex; gap: 15px; align-items: center; }
+        .btn {
+            padding: 10px 22px; border-radius: 10px; text-decoration: none;
+            color: white; font-weight: bold; font-size: 0.85rem;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative; overflow: hidden; border: none; cursor: pointer;
         }
+        /* 選取按鈕的點擊動畫 */
+        .btn:active { transform: scale(0.92); filter: brightness(0.8); }
+        
+        .btn-mc { background: var(--mc-green); }
+        .btn-dc { background: var(--discord-blue); }
+        .btn:hover { transform: translateY(-3px); box-shadow: 0 5px 20px var(--glow-color); }
 
-        .join-btn:hover {
-            transform: scale(1.05);
-            background-color: #4752c4;
+        /* 頁面切換動畫 */
+        .view-section {
+            display: none; width: 100%; padding: 120px 10% 60px; box-sizing: border-box;
+            opacity: 0; transform: translateY(30px);
+            transition: opacity 0.5s ease, transform 0.5s ease;
         }
+        .view-section.active { display: block; opacity: 1; transform: translateY(0); }
 
-        footer { margin-top: 30px; font-size: 0.8rem; color: #72767d; }
+        /* 內容卡片 */
+        .grid-layout {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px; margin-top: 40px;
+        }
+        .info-card {
+            background: var(--card-bg); border-radius: 20px; padding: 35px;
+            border: 1px solid rgba(255,255,255,0.05); cursor: pointer;
+            transition: all 0.4s ease;
+        }
+        .info-card:hover {
+            background: rgba(88, 101, 242, 0.08);
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            border-color: var(--discord-blue);
+            transform: translateY(-8px);
+        }
+        .info-card h2 { margin-top: 0; font-size: 1.4rem; display: flex; align-items: center; gap: 12px; }
+
+        /* 開票系統特定樣式 */
+        .ticket-box { background: rgba(237, 66, 69, 0.1); border-left: 5px solid var(--ticket-red); padding: 20px; border-radius: 10px; margin: 20px 0; }
+        .ticket-btn { background: var(--ticket-red); padding: 15px 30px; font-size: 1.1rem; margin-top: 20px; }
+
+        /* 身分標籤 */
+        .role-tag { display: inline-block; padding: 3px 10px; border-radius: 5px; background: rgba(88, 101, 242, 0.15); margin: 4px; font-size: 0.9rem; border: 1px solid rgba(88,101,242,0.2); }
+
+        /* 設定彈窗 */
+        .modal-bg { display: none; position: fixed; top:0; left:0; width:100%; height:100%; background: rgba(0,0,0,0.85); backdrop-filter: blur(10px); z-index: 2000; }
+        .modal-body { background: var(--bg-gradient); color: var(--text-color); width: 90%; max-width: 750px; margin: 8vh auto; padding: 40px; border-radius: 25px; max-height: 80vh; overflow-y: auto; position: relative; }
+        
+        .switch-group { display: flex; gap: 10px; margin: 15px 0 30px; }
+        .switch-btn { flex: 1; padding: 12px; border: 1px solid #444; background: none; color: var(--text-color); border-radius: 8px; cursor: pointer; transition: 0.3s; font-weight: bold; }
+        .switch-btn.active { background: var(--discord-blue); color: white; border-color: var(--discord-blue); box-shadow: 0 0 15px var(--discord-blue); }
+        .switch-btn:active { transform: scale(0.95); }
+
+        .back-nav { cursor: pointer; color: var(--discord-blue); margin-bottom: 25px; display: inline-block; font-weight: bold; transition: 0.3s; }
+        .back-nav:hover { letter-spacing: 1px; }
+
+        @media (max-width: 768px) {
+            nav { height: auto; padding: 15px; flex-direction: column; gap: 10px; }
+            .nav-right { flex-wrap: wrap; justify-content: center; }
+        }
     </style>
 </head>
-<body>
+<body class="dark-theme">
 
-<div class="container">
-    <h1>🎮 遊戲吧 Players’ Tavern！</h1>
-    <p class="welcome-msg">👋 歡迎來到伺服器！<br>這裡是屬於大家的遊戲交流空間，無論是手遊、PC 還是家機玩家，我們都在這等你！</p>
-
-    <div class="features">
-        <ul>
-            <li>與夥伴一起討論遊戲、交流技巧</li>
-            <li>使用揪團頻道快速找到隊友</li>
-            <li>加入語音頻道，一起暢快聊天打遊戲</li>
-        </ul>
+<nav>
+    <div class="logo-box" onclick="goTo('home')">
+        <span style="font-weight: 900; font-size: 1.3rem; letter-spacing: 0.5px;">PLAYERS’ TAVERN！</span>
+        <span class="beta-badge">BETA</span>
     </div>
-
-    <div class="rules">
-        <strong>✅ 伺服器公約：</strong><br>
-        保持友善，尊重每位成員。<br>
-        遵守規則，維持良好氛圍。<br>
-        ✨ 加入伺服器 = 同意遵守規則
+    <div class="nav-right">
+        <a href="http://skyblock-pt.playwithbao.com:31031/#world:0:0:0:1500:0:0:0:0:perspective" class="btn btn-mc" target="_blank">⛏️ MC 地圖</a>
+        <a href="https://discord.gg/YMqqsQKgWk" class="btn btn-dc" target="_blank">💬 Discord</a>
+        <div style="cursor: pointer; font-size: 1.6rem; margin-left: 10px;" onclick="toggleSettings()">⚙️</div>
     </div>
+</nav>
 
-    <a href="https://discord.gg/你的邀請碼" class="join-btn" target="_blank">
-        立即加入 Discord
-    </a>
+<div id="content-wrapper">
+    <section id="home" class="view-section active">
+        <h1 style="font-size: clamp(2.2rem, 7vw, 4rem); margin:0;">遊戲吧 <span style="color:var(--discord-blue);">Players’ Tavern！</span></h1>
+        <p id="live-count" style="font-size: 1.1rem; color: #888; margin-top: 15px;">📡 正在連線至社群衛星...</p>
+        
+        <div class="grid-layout">
+            <div class="info-card" onclick="goTo('news')">
+                <h2>📢 最新公告</h2>
+                <p>掌握社群最新維護、開發進度與更新日誌。</p>
+            </div>
+            <div class="info-card" onclick="goTo('giveaway')">
+                <h2>🎁 抽獎活動</h2>
+                <p>不定期舉辦遊戲序號、虛寶與加成獎勵抽取。</p>
+            </div>
+            <div class="info-card" onclick="goTo('boost')">
+                <h2>💎 加成通知</h2>
+                <p>感謝為社群提供加成的英雄，查看解鎖特權。</p>
+            </div>
+            <div class="info-card" onclick="goTo('roles')">
+                <h2>👤 身分介紹</h2>
+                <p>了解創作者認證、管理團隊與設備身分組。</p>
+            </div>
+            <div class="info-card" style="border-color: var(--ticket-red);" onclick="goTo('ticket')">
+                <h2 style="color:var(--ticket-red);">🎫 開票系統</h2>
+                <p>進行違規檢舉、解除禁言申請或正式事務回報。</p>
+            </div>
+        </div>
+    </section>
 
-    <footer>
-        © 2026 遊戲吧 Players’ Tavern！ | 祝你在這裡找到好隊友
-    </footer>
+    <section id="news" class="view-section"><div class="back-nav" onclick="goTo('home')">← 返回主目錄</div><h1>📢 最新公告</h1><div style="text-align:center; padding:100px 0; color:#666;"><h3>目前暫無內容</h3></div></section>
+    
+    <section id="giveaway" class="view-section"><div class="back-nav" onclick="goTo('home')">← 返回主目錄</div><h1>🎁 抽獎活動</h1><div style="text-align:center; padding:100px 0; color:#666;"><h3>目前暫無內容</h3></div></section>
+    
+    <section id="boost" class="view-section"><div class="back-nav" onclick="goTo('home')">← 返回主目錄</div><h1>💎 加成通知</h1><div style="text-align:center; padding:100px 0; color:#666;"><h3>目前暫無內容</h3></div></section>
+
+    <section id="roles" class="view-section">
+        <div class="back-nav" onclick="goTo('home')">← 返回主目錄</div>
+        <h1>👤 伺服器身分組介紹</h1>
+        <div id="role-display-area"></div>
+    </section>
+
+    <section id="ticket" class="view-section">
+        <div class="back-nav" onclick="goTo('home')">← 返回主目錄</div>
+        <h1>🎫 開票系統說明</h1>
+        <div id="ticket-rules-area"></div>
+        <div style="text-align:center; margin-top: 40px;">
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLSfvIMxzXlimAY_dKsfqRsVD8qXeigtpyZCYLoGbFJgcEPiqMA/viewform" class="btn ticket-btn" target="_blank">建立支援票單 Create Ticket</a>
+        </div>
+    </section>
 </div>
+
+<div id="settings-modal" class="modal-bg">
+    <div class="modal-body">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom: 25px;">
+            <h2 style="margin:0;">⚙️ 介面與社群規範</h2>
+            <span style="font-size:2rem; cursor:pointer;" onclick="toggleSettings()">&times;</span>
+        </div>
+
+        <label>主題色調 Theme</label>
+        <div class="switch-group">
+            <button class="switch-btn active" id="th-dark" onclick="setTheme('dark')">黑色漸變 (Dark)</button>
+            <button class="switch-btn" id="th-light" onclick="setTheme('light')">白色漸變 (Light)</button>
+        </div>
+
+        <label>顯示語言 Language</label>
+        <div class="switch-group">
+            <button class="switch-btn active" id="lg-zh" onclick="setLang('zh')">繁體中文</button>
+            <button class="switch-btn" id="lg-en" onclick="setLang('en')">English (US)</button>
+        </div>
+
+        <hr style="border:0; border-top:1px solid rgba(255,255,255,0.1); margin: 30px 0;">
+
+        <div id="full-rules-box"></div>
+    </div>
+</div>
+
+<script>
+    const serverID = "1458066464194957448";
+
+    const contentStore = {
+        zh: {
+            rules: `
+                <h2 style="color:var(--discord-blue)">📜 遊戲社群守則 (2026/3/18)</h2>
+                <h3>一、 核心行為準則與零容忍政策</h3>
+                <p><b>尊重與友善交流：</b>嚴禁針對他人發布仇恨言論、歧視、人身攻擊、霸凌或惡意騷擾。無論是針對種族、性別、性向或宗教的攻擊，本伺服器皆採零容忍政策。（宣洩情緒髒話可以接受但請別特別針對他人）</p>
+                <p><b>禁止侵犯隱私 (Doxxing)：</b>絕對禁止肉搜、散布或威脅散布任何成員的真實姓名、照片、住址或聯絡方式等個人隱私資訊。</p>
+                <p><b>禁止不當內容：</b>嚴禁發布、連結或暗示任何包含色情（NSFW）、極端暴力、血腥或違反兒少保護的內容。</p>
+                <p><b>禁止政治與敏感爭議：</b>為保持遊戲社群的純粹性，請避免在公共頻道引起激烈的政治、宗教或社會爭議辯論。</p>
+                <h3>二、 遊戲與版權規範</h3>
+                <p><b>尊重智慧財產權：</b>禁止分享盜版遊戲載點、非法破解軟體、未經授權的伺服器架設檔案或其他侵權內容。</p>
+                <h3>三、 頻道與語音使用規範</h3>
+                <p><b>分類與揪團禮儀：</b>請依照各頻道的設立主題進行討論。尋找遊戲夥伴請使用專屬的「揪團頻道」，並善用遊戲身分組標記，嚴禁濫用 @everyone 或 @here。</p>
+                <p><b>語音頻道秩序：</b>進入語音頻道請保持基本禮儀。嚴禁使用變聲器惡意干擾、大聲喧嘩（Mic Spamming）或播放刺耳噪音。</p>
+                <p><b>第三方工具使用：</b>若需使用音樂機器人或音效板（Soundpad），必須先徵求該語音頻道內其他成員的同意。</p>
+                <h3>四、 反垃圾訊息與廣告規範</h3>
+                <p><b>禁止惡意洗版：</b>嚴禁任何形式的灌水、洗頻（Spamming）、無意義的短暫連續發言，或惡意刷出大量貼圖與 GIF。</p>
+                <p><b>限制廣告與推銷：</b>未經管理團隊明確授權，禁止在任何頻道（包含私訊成員）發布商業廣告、其他 Discord 伺服器邀請連結或個人頻道推廣。</p>
+                <p><b>禁止冒充身分：</b>嚴禁冒用管理員身分、使用易混淆的管理員頭像/暱稱，或散布未經證實的伺服器假消息。</p>
+                <h3>五、 爭議解決與管理員權限</h3>
+                <p><b>違規處分機制：</b>管理團隊將依據違規程度執行處分，流程包含：口頭警告、暫時禁言（Time Out）、強制踢出（Kick）或永久封鎖（Ban）。</p>
+            `,
+            roles: `
+                <div style="background:rgba(0,0,0,0.1); padding:20px; border-radius:15px; margin-bottom:20px;">
+                    <h3 style="color:var(--discord-blue);">【基礎成員】 — 初來乍到的冒險者</h3>
+                    <p><span class="role-tag">@旅行者</span>：完成入群驗證後的標準身分。</p>
+                    <p><span class="role-tag">@手機玩家</span> <span class="role-tag">@手柄玩家</span> <span class="role-tag">@電腦玩家</span>：設備標籤，協助尋找隊友。</p>
+                    <p><span class="role-tag">@YouTube</span>：創作者認證（500訂閱+平均100觀看）。</p>
+                </div>
+                <div style="background:rgba(0,0,0,0.1); padding:20px; border-radius:15px; margin-bottom:20px;">
+                    <h3 style="color:var(--discord-blue);">【通知設置】 — 掌握第一手資訊</h3>
+                    <p><span class="role-tag">@公告通知</span> <span class="role-tag">@投票通知</span> <span class="role-tag">@抽獎通知</span></p>
+                </div>
+                <div style="background:rgba(0,0,0,0.1); padding:20px; border-radius:15px;">
+                    <h3 style="color:var(--discord-blue);">【管理團隊】 — 維護秩序的守護者</h3>
+                    <p><span class="role-tag">@版主</span>：聊天秩序維護與初步調解。</p>
+                    <p><span class="role-tag">@管理員</span>：伺服器架構與重大懲處執行。</p>
+                    <p><span class="role-tag">@HR (人力資源)</span>：招募審核與成員爭端調解。</p>
+                </div>
+            `,
+            ticket: `
+                <div class="ticket-box">
+                    <h3>💡 歡迎來到《－開票》系統！</h3>
+                    <p>本系統主要用於以下兩種用途，請根據需求開票：</p>
+                    <h4 style="margin-bottom:10px;">1. 解除禁言／誤封鎖申請</h4>
+                    <ul style="font-size:0.95rem;">
+                        <li>被禁言／封鎖的大致時間與頻道</li>
+                        <li>當時的情況與你認為的原因</li>
+                        <li>為何你認為是誤判或已改善行為</li>
+                    </ul>
+                    <h4 style="margin-bottom:10px;">2. 檢舉成員行為</h4>
+                    <ul style="font-size:0.95rem;">
+                        <li>被檢舉者的 ID 或暱稱</li>
+                        <li>發生大致時間與頻道</li>
+                        <li>具體違規行為（可附截圖）</li>
+                    </ul>
+                    <p style="color:var(--ticket-red); font-weight:bold; font-size:0.9rem;">⚠️ 注意：請勿濫用票務系統，惡意開票者將依規則處理。我們會保護檢舉者的匿名性。</p>
+                </div>
+            `
+        },
+        en: {
+            rules: "<h2>📜 Community Rules</h2><p>English rules content for the community.</p>",
+            roles: "<h2>👤 Server Roles</h2><p>English role details.</p>",
+            ticket: "<h2>🎫 Ticket System</h2><p>Please use this system for appeals and reports.</p>"
+        }
+    };
+
+    function goTo(pageId) {
+        const current = document.querySelector('.view-section.active');
+        if (current) {
+            current.style.opacity = '0';
+            current.style.transform = 'translateY(-20px)';
+            setTimeout(() => {
+                current.classList.remove('active');
+                const next = document.getElementById(pageId);
+                next.classList.add('active');
+                setTimeout(() => {
+                    next.style.opacity = '1';
+                    next.style.transform = 'translateY(0)';
+                }, 50);
+            }, 400);
+        }
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function setTheme(theme) {
+        document.body.className = (theme === 'light') ? 'light-theme' : 'dark-theme';
+        document.getElementById('th-dark').classList.toggle('active', theme === 'dark');
+        document.getElementById('th-light').classList.toggle('active', theme === 'light');
+    }
+
+    function setLang(lang) {
+        const l = contentStore[lang];
+        document.getElementById('full-rules-box').innerHTML = l.rules;
+        document.getElementById('role-display-area').innerHTML = l.roles;
+        document.getElementById('ticket-rules-area').innerHTML = l.ticket;
+        document.getElementById('lg-zh').classList.toggle('active', lang === 'zh');
+        document.getElementById('lg-en').classList.toggle('active', lang === 'en');
+    }
+
+    function toggleSettings() {
+        const modal = document.getElementById('settings-modal');
+        modal.style.display = (modal.style.display === 'block') ? 'none' : 'block';
+    }
+
+    async function syncDiscord() {
+        try {
+            const res = await fetch(`https://discord.com/api/guilds/${serverID}/widget.json`);
+            const d = await res.json();
+            document.getElementById('live-count').innerHTML = `🟢 <b>${d.presence_count}</b> 位玩家正在基地交流 | 狀態: 良好`;
+        } catch(e) {
+            document.getElementById('live-count').innerText = "📡 訊號干擾 (請確認 Widget 已開啟)";
+        }
+    }
+
+    // 初始化
+    setLang('zh');
+    syncDiscord();
+    setInterval(syncDiscord, 30000);
+</script>
 
 </body>
 </html>
