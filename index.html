@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>遊戲吧 Players’ Tavern！ | 歡迎加入</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <style>
+        :root {
+            --primary-color: #5865F2; /* Discord 藍 */
+            --bg-dark: #23272a;
+            --card-bg: #2c2f33;
+            --text-color: #ffffff;
+        }
+
+        body {
+            font-family: 'Noto Sans TC', sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-color);
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            line-height: 1.6;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 600px;
+            background: var(--card-bg);
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            text-align: center;
+            border-top: 5px solid var(--primary-color);
+        }
+
+        h1 { font-size: 2.5rem; margin-bottom: 10px; color: var(--primary-color); }
+        .welcome-msg { font-size: 1.1rem; color: #b9bbbe; margin-bottom: 30px; }
+
+        .features {
+            text-align: left;
+            background: rgba(0,0,0,0.2);
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+        }
+
+        .features ul { list-style: none; padding: 0; }
+        .features li { margin: 10px 0; padding-left: 25px; position: relative; }
+        .features li::before { content: "🎮"; position: absolute; left: 0; }
+
+        .rules {
+            font-size: 0.9rem;
+            color: #faa61a;
+            border: 1px dashed #faa61a;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+        }
+
+        .join-btn {
+            display: inline-block;
+            background-color: var(--primary-color);
+            color: white;
+            padding: 15px 40px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            text-decoration: none;
+            border-radius: 30px;
+            transition: 0.3s transform, 0.3s background;
+        }
+
+        .join-btn:hover {
+            transform: scale(1.05);
+            background-color: #4752c4;
+        }
+
+        footer { margin-top: 30px; font-size: 0.8rem; color: #72767d; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>🎮 遊戲吧 Players’ Tavern！</h1>
+    <p class="welcome-msg">👋 歡迎來到伺服器！<br>這裡是屬於大家的遊戲交流空間，無論是手遊、PC 還是家機玩家，我們都在這等你！</p>
+
+    <div class="features">
+        <ul>
+            <li>與夥伴一起討論遊戲、交流技巧</li>
+            <li>使用揪團頻道快速找到隊友</li>
+            <li>加入語音頻道，一起暢快聊天打遊戲</li>
+        </ul>
+    </div>
+
+    <div class="rules">
+        <strong>✅ 伺服器公約：</strong><br>
+        保持友善，尊重每位成員。<br>
+        遵守規則，維持良好氛圍。<br>
+        ✨ 加入伺服器 = 同意遵守規則
+    </div>
+
+    <a href="https://discord.gg/你的邀請碼" class="join-btn" target="_blank">
+        立即加入 Discord
+    </a>
+
+    <footer>
+        © 2026 遊戲吧 Players’ Tavern！ | 祝你在這裡找到好隊友
+    </footer>
+</div>
+
+</body>
+</html>
