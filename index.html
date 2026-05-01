@@ -46,7 +46,7 @@
         [data-theme="aurora"] { --bg-color: #000000; --bg-image: linear-gradient(135deg, #004d40, #000000); --glow-color: #1de9b6; --text-color: #ffffff; --text-muted: #cccccc;}
         [data-theme="lava"] { --bg-color: #000000; --bg-image: linear-gradient(135deg, #8a0303, #000000); --glow-color: #ff3300; --text-color: #ffffff; --text-muted: #cccccc;}
 
-        /* ☀️ 淺色系主題 (修正對比度 BUG) */
+        /* ☀️ 淺色系主題 */
         :is([data-theme="light"], [data-theme="matcha"], [data-theme="sakura"], [data-theme="sky"]) {
             --text-color: #1a1a1a;
             --text-muted: #444444;
@@ -101,7 +101,6 @@
         :is([data-theme="light"], [data-theme="matcha"], [data-theme="sakura"], [data-theme="sky"]) nav { background: rgba(255,255,255,0.4); }
         nav:hover { border-bottom-color: var(--glow-color); box-shadow: 0 0 25px var(--glow-color); }
 
-        /* 導覽列滾動縮小樣式 */
         nav.nav-scrolled {
             height: 60px;
             background: rgba(0,0,0,0.6);
@@ -133,7 +132,6 @@
         .view-section.active { display: block; animation: pageFadeIn 0.35s ease-out forwards; }
         @keyframes pageFadeIn { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
         
-        /* 升級版 Reveal 動畫 */
         .reveal { opacity: 0; transform: translateY(30px) scale(0.97); transition: all 0.7s cubic-bezier(0.25, 1, 0.5, 1); }
         .reveal.active { opacity: 1; transform: translateY(0) scale(1); }
 
@@ -170,7 +168,6 @@
         :is([data-theme="light"], [data-theme="matcha"], [data-theme="sakura"], [data-theme="sky"]) .skeleton { background: linear-gradient(90deg, rgba(0,0,0,0.05) 25%, rgba(0,0,0,0.1) 50%, rgba(0,0,0,0.05) 75%); }
         @keyframes skeletonLoading { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
         
-        /* 滾動成員區塊 */
         .dc-scroll-wrapper { position: relative; display: flex; align-items: center; margin-top: 15px; width: 100%; }
         .dc-member-list { 
             display: flex; overflow-x: auto; scroll-behavior: smooth; gap: 10px; width: 100%; padding: 5px 0;
@@ -263,13 +260,14 @@
 
         @media (max-width: 768px) { 
             nav { height: auto; padding: 15px; flex-direction: column; gap: 10px; } 
-            nav.nav-scrolled { padding: 10px 15px; } /* 手機版導覽縮小 */
+            nav.nav-scrolled { padding: 10px 15px; } 
             .view-section { padding-top: 150px; }
             footer { font-size: 0.7rem; gap: 8px; flex-wrap: wrap; }
             #cursor-glow { display: none; }
             .theme-grid { display: flex; flex-wrap: nowrap; overflow-x: auto; scroll-snap-type: x mandatory; padding-bottom: 10px; }
             .theme-btn { flex: 0 0 120px; scroll-snap-align: start; }
-            .scroll-arrow { display: none !important; } /* 手機端依賴原生滑動 */
+            .scroll-arrow { display: none !important; }
+            .mc-info-box-wrapper { padding: 15px !important; }
         }
     </style>
 </head>
@@ -336,14 +334,15 @@
                 </div>
             </div>
 
-            <div class="widget-container" style="flex:1; min-width:300px; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; border-color: var(--mc-green);">
-                <h3 style="margin-top:0; color:var(--mc-green); font-size: 1.5rem;" data-i18n="mcStatusTitle">⛏️ Minecraft 伺服器</h3>
-                <p style="color:var(--text-muted); font-size: 0.95rem; margin-bottom: 20px; line-height: 1.8;">
-                    <span data-i18n="mcStatusDesc">歡迎加入我們的專屬生存世界！<br>伺服器 IP:</span> 
-                    <code style="background: rgba(0,0,0,0.3); padding: 4px 8px; border-radius: 6px; color:var(--text-color); font-size: 1rem;">plays-survival.playwithbao.com</code>
-                </p>
+            <!-- 升級版 Minecraft 伺服器資訊專區 -->
+            <div class="widget-container" style="flex:1; min-width:300px; display: flex; flex-direction: column; border-color: var(--mc-green);">
+                <h3 style="margin-top:0; color:var(--mc-green); font-size: 1.5rem; text-align: center;" data-i18n="mcStatusTitle">⛏️ Minecraft 伺服器資訊專區</h3>
+                
+                <div id="mc-info-box" style="margin-bottom: 20px;" data-i18n="mcInfoBlock">
+                    <!-- 將由 JavaScript 的多語系字典檔自動載入渲染 -->
+                </div>
+
                 <div style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap;">
-                    <a href="http://plays-survival.playwithbao.com/#world:0:0:0:1500:0:0:0:0:perspective" class="btn btn-mc" target="_blank" rel="noopener noreferrer" data-i18n="btnMap">🗺️ 查看社群地圖</a>
                     <button class="btn" style="background: rgba(255,255,255,0.1); border: 1px solid var(--glass-border); color: inherit;" onclick="copyText('plays-survival.playwithbao.com')" data-i18n="btnCopyIp">📋 複製 IP</button>
                 </div>
             </div>
@@ -493,7 +492,7 @@
             homeTitle: "遊戲吧 <span style=\"color:var(--discord-blue); text-shadow: 0 0 15px var(--glow-color);\">Players’ Tavern！</span>",
             marqueeMsg: "【最新消息】遊戲吧網站全面邁入正式版！全新隱私權條款與深淺色主題系統已上線。",
             dcStatusTitle: "💬 Discord 社群狀態", dcOnlineText: "位玩家在線", btnCopyInvite: "複製邀請碼",
-            mcStatusTitle: "⛏️ Minecraft 伺服器", mcStatusDesc: "歡迎加入我們的專屬生存世界！<br>伺服器 IP:", btnMap: "🗺️ 查看社群地圖", btnCopyIp: "📋 複製 IP",
+            mcStatusTitle: "⛏️ Minecraft 伺服器資訊專區", btnCopyIp: "📋 複製 IP",
             cardRulesTitle: "📜 社群規範", cardRulesDesc: "了解並遵守基地的核心行為準則與零容忍政策。",
             cardBoostTitle: "💎 加成通知", cardBoostDesc: "感謝為社群提供加成的英雄，查看解鎖特權。",
             cardRolesTitle: "👤 身分介紹", cardRolesDesc: "了解創作者認證、管理團隊與設備身分組。",
@@ -507,15 +506,41 @@
             modalThemeTitle: "🎨 背景色彩選擇", modalThemeDesc: "選擇您喜歡的主題。點擊「跟隨系統」可自動適應您的裝置深淺色設定。", thSystem: "跟隨系統", thDark: "純黑漸變", thLight: "純白漸變", btnDone: "完成設定",
             modalSettingsTitle: "⚙️ 網站設定", modalSettingsDesc: "管理您的網站本地偏好與語言設定。", btnReset: "🔄 重置網站 (恢復預設)",
             toastCopied: "✅ 已複製到剪貼簿！", toastReset: "✅ 網站設定已重置！", dcConnectFail: "⚠️ 連線失敗：請確認 Discord 伺服器的 Widget (小工具) 是否已開啟。",
-            channelComingSoon: "將於日後開放，敬請期待"
+            mcInfoBlock: `
+                <div class="mc-info-box-wrapper" style="text-align: left; background: rgba(0,0,0,0.2); padding: 20px; border-radius: 12px; font-size: 0.95rem; border: 1px solid rgba(59, 165, 92, 0.3);">
+                    <p style="margin: 5px 0;"><strong>伺服器位址：</strong> <code style="background: rgba(0,0,0,0.5); padding: 2px 6px; border-radius: 4px; color:var(--text-color);">plays-survival.playwithbao.com</code></p>
+                    <div style="display: flex; flex-wrap: wrap; gap: 15px; margin: 5px 0;">
+                        <span><strong>基岩版連結埠：</strong> 44750</span>
+                        <span><strong>版本需求：</strong> 1.21.11</span>
+                    </div>
+                    <p style="margin: 5px 0;"><strong>開放時間：</strong> 24小時(維修時會另外宣布)</p>
+                    <p style="margin: 5px 0; word-break: break-all;"><strong>遊戲官網：</strong> <a href="http://plays-survival.playwithbao.com:31031/" target="_blank" style="color: var(--discord-blue); text-decoration: none;">http://plays-survival.playwithbao.com:31031/</a></p>
+                    
+                    <hr style="border: none; border-top: 1px solid var(--glass-border); margin: 15px 0;">
+                    
+                    <ul style="padding-left: 0; list-style-type: none; margin: 10px 0; color: var(--text-muted); line-height: 1.8;">
+                        <li>✔ 尊重他人，不惡意破壞或偷竊</li>
+                        <li>✔ 禁止外掛與作弊</li>
+                        <li>✔ 遵守社群管理員公告</li>
+                        <li>✔ 遊玩前需要前往網站進行驗證</li>
+                    </ul>
+                    <p style="color: #faa61a; margin: 10px 0; font-weight: bold; background: rgba(250, 166, 26, 0.1); padding: 8px; border-radius: 6px; border-left: 4px solid #faa61a;">⚠ 遊玩前請詳讀網頁內容,包括規則,指令</p>
+                    
+                    <hr style="border: none; border-top: 1px solid var(--glass-border); margin: 15px 0;">
+                    
+                    <p style="margin: 5px 0; font-size: 0.9rem; color: var(--text-muted);">後臺管理: <span class="role-tag" style="background:#9b59b6; margin: 0 4px;">@【有Bug的蘋果派】欸破死贛</span></p>
+                    <p style="margin: 5px 0; font-size: 0.9rem; color: var(--text-muted);">服主: <span class="role-tag" style="background:#e74c3c; margin: 0 4px;">@LichenTempest</span></p>
+                    <p style="margin: 10px 0 5px 0; font-size: 0.9rem; color: var(--text-muted);">想要分享建築或作品，可以到 <strong style="color: var(--text-color);">⁠-《遊戲討論》</strong> 區貼圖 <span style="color: var(--discord-blue); font-weight: bold;">@Minecraft</span></p>
+                </div>
+            `
         },
         en: {
-            navHome: "PLAYERS’ TAVERN!", navMap: "⛏️ MC Map", navDiscord: "💬 Discord",
+            navHome: "PLAYERS’ TAVERN!", navMap: "⛏️ MC Community", navDiscord: "💬 Discord",
             navPrivacy: "Privacy", navChannel: "Channel Info", navSuggest: "Feedback", navTerms: "Terms", navLegal: "Legal",
             homeTitle: "Welcome to <span style=\"color:var(--discord-blue); text-shadow: 0 0 15px var(--glow-color);\">Players’ Tavern!</span>",
             marqueeMsg: "【Latest】 The site is officially launched with full English support and a new privacy policy!",
             dcStatusTitle: "💬 Discord Status", dcOnlineText: "Players Online", btnCopyInvite: "Copy Invite",
-            mcStatusTitle: "⛏️ Minecraft Server", mcStatusDesc: "Join our exclusive survival world!<br>IP:", btnMap: "🗺️ Web Map", btnCopyIp: "📋 Copy IP",
+            mcStatusTitle: "⛏️ Minecraft Server Info", btnCopyIp: "📋 Copy IP",
             cardRulesTitle: "📜 Rules", cardRulesDesc: "Read our core community guidelines and zero-tolerance policy.",
             cardBoostTitle: "💎 Boosters", cardBoostDesc: "Thanks to our server boosters. View your perks.",
             cardRolesTitle: "👤 Roles", cardRolesDesc: "Learn about creator verification, admin team, and platform roles.",
@@ -529,7 +554,33 @@
             modalThemeTitle: "🎨 Theme Color", modalThemeDesc: "Choose a theme. 'System' adapts to your device's dark/light mode.", thSystem: "System", thDark: "Dark Fade", thLight: "Light Fade", btnDone: "Done",
             modalSettingsTitle: "⚙️ Settings", modalSettingsDesc: "Manage local preferences and language.", btnReset: "🔄 Reset Website",
             toastCopied: "✅ Copied to clipboard!", toastReset: "✅ Settings reset!", dcConnectFail: "⚠️ Connection failed: Discord Widget might be disabled.",
-            channelComingSoon: "Will open in the future, stay tuned"
+            mcInfoBlock: `
+                <div class="mc-info-box-wrapper" style="text-align: left; background: rgba(0,0,0,0.2); padding: 20px; border-radius: 12px; font-size: 0.95rem; border: 1px solid rgba(59, 165, 92, 0.3);">
+                    <p style="margin: 5px 0;"><strong>Server Address:</strong> <code style="background: rgba(0,0,0,0.5); padding: 2px 6px; border-radius: 4px; color:var(--text-color);">plays-survival.playwithbao.com</code></p>
+                    <div style="display: flex; flex-wrap: wrap; gap: 15px; margin: 5px 0;">
+                        <span><strong>Bedrock Port:</strong> 44750</span>
+                        <span><strong>Version:</strong> 1.21.11</span>
+                    </div>
+                    <p style="margin: 5px 0;"><strong>Uptime:</strong> 24/7 (Maintenance will be announced)</p>
+                    <p style="margin: 5px 0; word-break: break-all;"><strong>Website:</strong> <a href="http://plays-survival.playwithbao.com:31031/" target="_blank" style="color: var(--discord-blue); text-decoration: none;">http://plays-survival.playwithbao.com:31031/</a></p>
+                    
+                    <hr style="border: none; border-top: 1px solid var(--glass-border); margin: 15px 0;">
+                    
+                    <ul style="padding-left: 0; list-style-type: none; margin: 10px 0; color: var(--text-muted); line-height: 1.8;">
+                        <li>✔ Respect others, no griefing or stealing</li>
+                        <li>✔ No hacks or cheats</li>
+                        <li>✔ Follow admin announcements</li>
+                        <li>✔ Website verification required before playing</li>
+                    </ul>
+                    <p style="color: #faa61a; margin: 10px 0; font-weight: bold; background: rgba(250, 166, 26, 0.1); padding: 8px; border-radius: 6px; border-left: 4px solid #faa61a;">⚠ Please read website rules and commands before playing</p>
+                    
+                    <hr style="border: none; border-top: 1px solid var(--glass-border); margin: 15px 0;">
+                    
+                    <p style="margin: 5px 0; font-size: 0.9rem; color: var(--text-muted);">Backend Admin: <span class="role-tag" style="background:#9b59b6; margin: 0 4px;">@【有Bug的蘋果派】欸破死贛</span></p>
+                    <p style="margin: 5px 0; font-size: 0.9rem; color: var(--text-muted);">Owner: <span class="role-tag" style="background:#e74c3c; margin: 0 4px;">@LichenTempest</span></p>
+                    <p style="margin: 10px 0 5px 0; font-size: 0.9rem; color: var(--text-muted);">Share builds in <strong style="color: var(--text-color);">⁠-《Game Discussion》</strong> & tag <span style="color: var(--discord-blue); font-weight: bold;">@Minecraft</span></p>
+                </div>
+            `
         }
     };
 
@@ -549,10 +600,15 @@
                 <div class="hof-card boost-card"><img src="https://ui-avatars.com/api/?name=鬼鬼&background=333&color=fff&size=128" loading="lazy" class="hof-avatar boost-avatar" alt="鬼鬼"><h3 style="margin: 5px 0;">鬼鬼</h3><p class="hof-id">xiao.</p><div><span class="role-tag" style="background:#f47fff; color:white; text-shadow:none;">Server Booster</span></div></div>
                 <div class="hof-card boost-card"><img src="https://ui-avatars.com/api/?name=Bobo&background=87CEEB&color=fff&size=128" loading="lazy" class="hof-avatar boost-avatar" alt="Tiny Bobo"><h3 style="margin: 5px 0;">Tiny Bobo</h3><p class="hof-id">bobo7755137_29015</p><div><span class="role-tag" style="background:#f47fff; color:white; text-shadow:none;">Server Booster</span></div></div>
             </div>`,
-        channel: `<div style="text-align: center; margin-bottom: 30px;"><h1 style="color: var(--discord-blue); text-shadow: 0 0 15px var(--glow-color);" data-i18n="navChannel">頻道資訊</h1></div>
-            <div class="role-section" style="text-align: center; padding: 60px 20px; border-left-color: var(--discord-blue);">
-                <h2 style="color: var(--text-color);" data-i18n="channelComingSoon">將於日後開放，敬請期待</h2>
-                <p style="color: var(--text-muted); margin-top: 15px;">我們之後會在這區塊加入關於 YouTube 頻道的豐富內容，請隨時關注我們的最新動態！</p>
+        channel: `<div style="text-align: center; margin-bottom: 30px;">
+                <h1 style="color: var(--discord-blue); text-shadow: 0 0 15px var(--glow-color);" data-i18n="navChannel">頻道資訊</h1>
+            </div>
+            <div class="role-section" style="text-align: center; padding: 40px 20px; border-left-color: var(--discord-blue); display: flex; flex-direction: column; align-items: center;">
+                <h2 style="color: var(--text-color); font-size: clamp(1.8rem, 5vw, 2.5rem); margin-bottom: 10px; text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);">夏日影音，敬請期待</h2>
+                <p style="color: var(--text-muted); font-size: 1.1rem; margin-top: 0; margin-bottom: 30px;">頻道正式公開的日期為2026年7月夏季</p>
+                <div style="width: 100%; max-width: 500px; border-radius: 15px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.5); border: 1px solid var(--glass-border);">
+                    <img src="https://github.com/Dyson201101010/players-tavern/blob/main/assets/9f94d003-c298-4ef7-a640-f05ac1e73be0_upscayl_5x_upscayl-standard-4x.png?raw=true" alt="夏日影音，敬請期待" style="width: 100%; height: auto; display: block;" onerror="this.src='https://placehold.co/600x800/1a1a1a/d4af37?text=Summer+Video+Coming+Soon'">
+                </div>
             </div>`,
         roles: `<h1>👤 伺服器身分組介紹</h1>
             <div class="role-section"><h3 style="color:var(--discord-blue); margin-top:0;">【基礎成員】 — 初來乍到的冒險者</h3><p><span class="role-tag">@旅行者</span> ：伺服器的核心成員，完成入群驗證後的標準身分。</p><p><span class="role-tag">@手機玩家</span> <span class="role-tag">@手柄玩家</span> <span class="role-tag">@電腦玩家</span> ：設備標籤，協助成員快速尋找同平台的遊玩夥伴。</p><p><span class="role-tag" style="background:#ff0000; text-shadow:none;">@YouTube</span> ：創作者認證位階。獲得條件：頻道達 <b>500 訂閱</b> 且影片平均播放量達 <b>100 次</b> 以上。</p></div>
@@ -630,10 +686,15 @@
                 <div class="hof-card boost-card"><img src="https://ui-avatars.com/api/?name=鬼鬼&background=333&color=fff&size=128" loading="lazy" class="hof-avatar boost-avatar" alt="鬼鬼"><h3 style="margin: 5px 0;">Ghost</h3><p class="hof-id">xiao.</p><div><span class="role-tag" style="background:#f47fff; color:white; text-shadow:none;">Server Booster</span></div></div>
                 <div class="hof-card boost-card"><img src="https://ui-avatars.com/api/?name=Bobo&background=87CEEB&color=fff&size=128" loading="lazy" class="hof-avatar boost-avatar" alt="Tiny Bobo"><h3 style="margin: 5px 0;">Tiny Bobo</h3><p class="hof-id">bobo7755137_29015</p><div><span class="role-tag" style="background:#f47fff; color:white; text-shadow:none;">Server Booster</span></div></div>
             </div>`,
-        channel: `<div style="text-align: center; margin-bottom: 30px;"><h1 style="color: var(--discord-blue); text-shadow: 0 0 15px var(--glow-color);" data-i18n="navChannel">Channel Info</h1></div>
-            <div class="role-section" style="text-align: center; padding: 60px 20px; border-left-color: var(--discord-blue);">
-                <h2 style="color: var(--text-color);" data-i18n="channelComingSoon">Will open in the future, stay tuned</h2>
-                <p style="color: var(--text-muted); margin-top: 15px;">We will add rich content about our YouTube channel in this section later. Please keep an eye on our latest updates!</p>
+        channel: `<div style="text-align: center; margin-bottom: 30px;">
+                <h1 style="color: var(--discord-blue); text-shadow: 0 0 15px var(--glow-color);" data-i18n="navChannel">Channel Info</h1>
+            </div>
+            <div class="role-section" style="text-align: center; padding: 40px 20px; border-left-color: var(--discord-blue); display: flex; flex-direction: column; align-items: center;">
+                <h2 style="color: var(--text-color); font-size: clamp(1.8rem, 5vw, 2.5rem); margin-bottom: 10px; text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);">Summer Video, Coming Soon</h2>
+                <p style="color: var(--text-muted); font-size: 1.1rem; margin-top: 0; margin-bottom: 30px;">Official channel launch date: Summer, July 2026</p>
+                <div style="width: 100%; max-width: 500px; border-radius: 15px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.5); border: 1px solid var(--glass-border);">
+                    <img src="https://github.com/Dyson201101010/players-tavern/blob/main/assets/9f94d003-c298-4ef7-a640-f05ac1e73be0_upscayl_5x_upscayl-standard-4x.png?raw=true" alt="Summer Video, Coming Soon" style="width: 100%; height: auto; display: block;" onerror="this.src='https://placehold.co/600x800/1a1a1a/d4af37?text=Summer+Video+Coming+Soon'">
+                </div>
             </div>`,
         roles: `<h1>👤 Server Roles</h1>
             <div class="role-section"><h3 style="color:var(--discord-blue); margin-top:0;">【Members】 — Welcome Adventurers</h3><p><span class="role-tag">@Traveler</span> : Core members, standard role after verification.</p><p><span class="role-tag">@Mobile</span> <span class="role-tag">@Console</span> <span class="role-tag">@PC</span> : Device tags to find gaming buddies.</p><p><span class="role-tag" style="background:#ff0000; text-shadow:none;">@YouTube</span> : Verified creator. Req: 500 subs, 100 avg views.</p></div>
