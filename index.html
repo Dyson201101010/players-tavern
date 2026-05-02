@@ -10,875 +10,607 @@
     <meta property="og:description" content="專業的跨平台遊戲社群，提供專屬 MC 伺服器！立刻加入我們！">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://discord.gg/YMqqsQKgWk">
-    <meta property="og:image" content="https://i.imgur.com/B10J78B.png"> <meta name="theme-color" content="#5865F2">
+    <meta property="og:image" content="https://i.imgur.com/B10J78B.png"> 
+    <meta name="theme-color" content="#000000">
 
-    <title>遊戲吧 Players’ Tavern！ | 專業遊戲社群基地</title>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;700;900&display=swap" rel="stylesheet">
+    <title>遊戲吧 Players’ Tavern！</title>
+    
+    <!-- 引入字體：標題使用 Noto Serif TC (襯線)，內文使用 Noto Sans TC (無襯線) -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&family=Noto+Serif+TC:wght@400;600;900&display=swap" rel="stylesheet">
+    
     <style>
         /* =========================================
-           核心變數與 16+ 主題系統
+           極簡美學核心變數 (Apple / Editorial Style)
            ========================================= */
         :root {
-            --discord-blue: #5865F2;
-            --mc-green: #3ba55c;
-            --ticket-red: #ed4245;
-            --text-color: #ffffff;
-            --text-muted: #cccccc;
-            --glass-bg: rgba(0, 0, 0, 0.45); 
-            --glass-border: rgba(255, 255, 255, 0.1); 
-            --footer-text: #cccccc;
-            --glow-color: rgba(88, 101, 242, 0.6);
-            --bg-color: #0a0a0a;
-            --bg-image: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
+            --bg: #000000;
+            --surface: #0a0a0a;
+            --surface-hover: #141414;
+            --border: #222222;
+            --text-main: #ffffff;
+            --text-muted: #888888;
+            --accent: #ffffff;
+            
+            --discord-brand: #5865F2;
+            --mc-brand: #3ba55c;
+            --ticket-brand: #ed4245;
+            
+            --font-serif: 'Noto Serif TC', serif;
+            --font-sans: 'Noto Sans TC', sans-serif;
         }
 
-        /* 🌙 深色系主題 */
-        [data-theme="dark"] { --bg-color: #0a0a0a; --bg-image: linear-gradient(135deg, #0a0a0a, #1a1a1a); --glow-color: rgba(255,255,255,0.2); --text-color: #ffffff; --text-muted: #cccccc;}
-        [data-theme="cyberpunk"] { --bg-color: #0f2027; --bg-image: linear-gradient(135deg, #0f2027, #203a43, #2c5364); --glow-color: #00e5ff; --text-color: #ffffff; --text-muted: #cccccc;}
-        [data-theme="amethyst"] { --bg-color: #1f1c2c; --bg-image: linear-gradient(135deg, #1f1c2c, #928dab); --glow-color: #d4a5ff; --text-color: #ffffff; --text-muted: #cccccc;}
-        [data-theme="ocean"] { --bg-color: #000851; --bg-image: linear-gradient(135deg, #1cb5e0, #000851); --glow-color: #1cb5e0; --text-color: #ffffff; --text-muted: #cccccc;}
-        [data-theme="sunset"] { --bg-color: #240b36; --bg-image: linear-gradient(135deg, #c31432, #240b36); --glow-color: #ff512f; --text-color: #ffffff; --text-muted: #cccccc;}
-        [data-theme="forest"] { --bg-color: #134e5e; --bg-image: linear-gradient(135deg, #134e5e, #71b280); --glow-color: #71b280; --text-color: #ffffff; --text-muted: #cccccc;}
-        [data-theme="crimson"] { --bg-color: #1a0005; --bg-image: linear-gradient(135deg, #5c0014, #1a0005); --glow-color: #ff0a33; --text-color: #ffffff; --text-muted: #cccccc;}
-        [data-theme="midnight"] { --bg-color: #020024; --bg-image: linear-gradient(135deg, #020024, #090979); --glow-color: #00d4ff; --text-color: #ffffff; --text-muted: #cccccc;}
-        [data-theme="gold"] { --bg-color: #1a1400; --bg-image: linear-gradient(135deg, #4a3b00, #1a1400); --glow-color: #ffd700; --text-color: #ffffff; --text-muted: #cccccc;}
-        [data-theme="neonpink"] { --bg-color: #1a0010; --bg-image: linear-gradient(135deg, #400028, #1a0010); --glow-color: #ff007f; --text-color: #ffffff; --text-muted: #cccccc;}
-        [data-theme="aurora"] { --bg-color: #000000; --bg-image: linear-gradient(135deg, #004d40, #000000); --glow-color: #1de9b6; --text-color: #ffffff; --text-muted: #cccccc;}
-        [data-theme="lava"] { --bg-color: #000000; --bg-image: linear-gradient(135deg, #8a0303, #000000); --glow-color: #ff3300; --text-color: #ffffff; --text-muted: #cccccc;}
-
-        /* ☀️ 淺色系主題 */
-        :is([data-theme="light"], [data-theme="matcha"], [data-theme="sakura"], [data-theme="sky"]) {
-            --text-color: #1a1a1a;
-            --text-muted: #444444;
-            --glass-bg: rgba(255, 255, 255, 0.85);
-            --glass-border: rgba(0, 0, 0, 0.15);
-            --footer-text: #444444;
+        /* 淺色模式 (純粹的高對比黑白) */
+        [data-theme="light"] {
+            --bg: #f5f5f7;
+            --surface: #ffffff;
+            --surface-hover: #f0f0f0;
+            --border: #e5e5ea;
+            --text-main: #1d1d1f;
+            --text-muted: #86868b;
+            --accent: #000000;
         }
-        [data-theme="light"] { --bg-color: #ffffff; --bg-image: linear-gradient(135deg, #f0f2f5, #ffffff); --glow-color: rgba(0, 0, 0, 0.15); }
-        [data-theme="matcha"] { --bg-color: #e8f5e9; --bg-image: linear-gradient(135deg, #e8f5e9, #c8e6c9); --glow-color: #4caf50; }
-        [data-theme="sakura"] { --bg-color: #fce4ec; --bg-image: linear-gradient(135deg, #fce4ec, #f8bbd0); --glow-color: #e91e63; }
-        [data-theme="sky"] { --bg-color: #e1f5fe; --bg-image: linear-gradient(135deg, #e1f5fe, #b3e5fc); --glow-color: #03a9f4; }
 
         html { scroll-behavior: smooth; }
         body, html {
             margin: 0; padding: 0; min-height: 100vh; width: 100%;
-            font-family: 'Noto Sans TC', sans-serif;
-            color: var(--text-color);
-            background-color: var(--bg-color);
-            background-image: var(--bg-image);
-            background-attachment: fixed;
-            transition: background 0.6s ease, color 0.4s ease;
+            font-family: var(--font-sans);
+            color: var(--text-main);
+            background-color: var(--bg);
+            transition: background 0.5s ease, color 0.5s ease;
             overflow-x: hidden;
             line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
         }
 
-        h1, h2, h3, p, span, div, code { text-shadow: 0 1px 3px rgba(0,0,0,0.1); }
-        :is([data-theme="light"], [data-theme="matcha"], [data-theme="sakura"], [data-theme="sky"]) :is(h1, h2, h3, h4, p, span, div, code) {
-            text-shadow: none;
+        h1, h2, h3, h4, h5, h6 { 
+            font-family: var(--font-serif); 
+            font-weight: 900; 
+            margin: 0; 
+            letter-spacing: 0.02em; 
+            line-height: 1.2;
         }
-
-        /* 🖱️ 滑鼠跟隨光暈 */
-        #cursor-glow {
-            position: fixed; top: 0; left: 0; width: 400px; height: 400px;
-            background: radial-gradient(circle, var(--glow-color) 0%, transparent 60%);
-            border-radius: 50%; pointer-events: none; z-index: 0;
-            transform: translate(-50%, -50%); opacity: 0.15;
-            transition: opacity 0.3s ease; mix-blend-mode: screen;
-        }
-        :is([data-theme="light"], [data-theme="matcha"], [data-theme="sakura"], [data-theme="sky"]) #cursor-glow { mix-blend-mode: multiply; opacity: 0.1; }
 
         /* =========================================
-           導航列與基礎元件
+           導航列 (極簡化)
            ========================================= */
         nav {
             position: fixed; top: 0; width: 100%; height: 80px;
             display: flex; justify-content: space-between; align-items: center;
             padding: 0 5%; box-sizing: border-box;
-            background: rgba(0,0,0,0.2); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
-            z-index: 1000; border-bottom: 1px solid var(--glass-border);
+            background: rgba(0, 0, 0, 0.4); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+            z-index: 1000; border-bottom: 1px solid var(--border);
             transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
         }
-        :is([data-theme="light"], [data-theme="matcha"], [data-theme="sakura"], [data-theme="sky"]) nav { background: rgba(255,255,255,0.4); }
-        nav:hover { border-bottom-color: var(--glow-color); box-shadow: 0 0 25px var(--glow-color); }
+        [data-theme="light"] nav { background: rgba(255, 255, 255, 0.7); }
 
-        nav.nav-scrolled {
-            height: 60px;
-            background: rgba(0,0,0,0.6);
-            box-shadow: 0 4px 20px rgba(0,0,0,0.4);
-        }
-        :is([data-theme="light"], [data-theme="matcha"], [data-theme="sakura"], [data-theme="sky"]) nav.nav-scrolled { 
-            background: rgba(255,255,255,0.85); 
-            box-shadow: 0 4px 20px rgba(0,0,0,0.1); 
+        nav.nav-scrolled { height: 60px; }
+
+        .logo-box { 
+            font-family: var(--font-serif); font-weight: 900; font-size: 1.4rem; 
+            letter-spacing: 0.05em; cursor: pointer; color: var(--text-main);
         }
 
-        .logo-box { display: flex; align-items: center; gap: 12px; cursor: pointer; z-index: 10; font-weight: 900; font-size: 1.3rem; letter-spacing: 0.5px; }
-
-        .nav-right { display: flex; gap: 15px; align-items: center; z-index: 10; }
-        .btn { padding: 10px 20px; border-radius: 10px; text-decoration: none; color: white !important; font-weight: bold; font-size: 0.85rem; transition: all 0.3s ease; border: none; cursor: pointer; font-family: inherit;}
-        .btn:hover { box-shadow: 0 0 15px currentColor; transform: translateY(-2px); }
-        .btn-mc { background: var(--mc-green); }
-        .btn-dc { background: var(--discord-blue); }
-        .icon-btn { cursor: pointer; font-size: 1.5rem; padding: 5px; transition: all 0.3s ease; background: none; border: none; color: inherit; }
-        .icon-btn:hover { transform: scale(1.15); text-shadow: 0 0 15px var(--glow-color); }
-
-        .announcement-bar {
-            margin-top: 0; padding: 10px 5%; background: rgba(250, 166, 26, 0.15); color: #faa61a;
-            border-bottom: 1px solid rgba(250, 166, 26, 0.3); font-weight: bold; font-size: 0.9rem;
-            display: flex; align-items: center; gap: 10px;
+        .nav-right { display: flex; gap: 20px; align-items: center; }
+        .nav-link { 
+            text-decoration: none; color: var(--text-main); font-size: 0.9rem; 
+            font-weight: 500; transition: color 0.3s; 
         }
-
-        #content-wrapper { position: relative; z-index: 5; }
-        .view-section { display: none; width: 100%; padding: 100px 10% 120px; box-sizing: border-box; }
-        .view-section.active { display: block; animation: pageFadeIn 0.35s ease-out forwards; }
-        @keyframes pageFadeIn { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
-        
-        .reveal { opacity: 0; transform: translateY(30px) scale(0.97); transition: all 0.7s cubic-bezier(0.25, 1, 0.5, 1); }
-        .reveal.active { opacity: 1; transform: translateY(0) scale(1); }
-
-        .breadcrumb {
-            display: flex; gap: 10px; align-items: center; font-size: 0.9rem; color: var(--footer-text); margin-bottom: 25px;
-            background: var(--glass-bg); padding: 10px 20px; border-radius: 12px; border: 1px solid var(--glass-border);
-            width: fit-content; backdrop-filter: blur(15px);
-        }
-        .bc-link { cursor: pointer; color: var(--discord-blue); font-weight: bold; transition: 0.3s; }
-        .bc-link:hover { text-shadow: 0 0 10px var(--discord-blue); }
-
-        .grid-layout { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; margin-top: 40px; }
-        
-        .info-card { 
-            background: var(--glass-bg); border-radius: 20px; padding: 30px; border: 1px solid var(--glass-border); 
-            cursor: pointer; transition: all 0.3s ease; box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15); position: relative; overflow: hidden;
-            color: var(--text-color);
-        }
-        .info-card::before {
-            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            background: radial-gradient(circle at 50% 0%, var(--glow-color) 0%, transparent 70%);
-            opacity: 0; transition: opacity 0.3s; pointer-events: none;
-        }
-        .info-card:hover { border-color: var(--glow-color); transform: translateY(-8px); box-shadow: 0 10px 30px rgba(0,0,0,0.3); }
-        .info-card:hover::before { opacity: 0.15; }
+        .nav-link:hover { color: var(--text-muted); }
+        .icon-btn { cursor: pointer; font-size: 1.2rem; background: none; border: none; color: var(--text-main); transition: 0.3s; padding: 5px;}
+        .icon-btn:hover { opacity: 0.6; }
 
         /* =========================================
-           伺服器 Widget 與滾動區域
+           主視覺 Hero (封面故事)
            ========================================= */
-        .widget-container { margin-top: 20px; padding: 25px; background: var(--glass-bg); border-radius: 15px; border: 1px solid var(--glass-border); flex: 1; min-width: 300px; overflow: hidden; }
-        .widget-flex { display: flex; flex-wrap: wrap; gap: 20px; }
-        
-        .skeleton { background: linear-gradient(90deg, rgba(255,255,255,0.05) 25%, rgba(255,255,255,0.15) 50%, rgba(255,255,255,0.05) 75%); background-size: 200% 100%; animation: skeletonLoading 1.5s infinite; border-radius: 8px; }
-        :is([data-theme="light"], [data-theme="matcha"], [data-theme="sakura"], [data-theme="sky"]) .skeleton { background: linear-gradient(90deg, rgba(0,0,0,0.05) 25%, rgba(0,0,0,0.1) 50%, rgba(0,0,0,0.05) 75%); }
-        @keyframes skeletonLoading { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
-        
-        .dc-scroll-wrapper { position: relative; display: flex; align-items: center; margin-top: 15px; width: 100%; }
-        .dc-member-list { 
-            display: flex; overflow-x: auto; scroll-behavior: smooth; gap: 10px; width: 100%; padding: 5px 0;
-            -ms-overflow-style: none; scrollbar-width: none; 
+        .hero-section {
+            position: relative; width: 100%; min-height: 100vh;
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+            text-align: center; padding: 0 5%; box-sizing: border-box;
+            background: radial-gradient(circle at 50% 50%, var(--surface) 0%, var(--bg) 100%);
+            overflow: hidden;
         }
-        .dc-member-list::-webkit-scrollbar { display: none; }
-        .scroll-arrow { 
-            background: rgba(0,0,0,0.5); color: white; border: none; cursor: pointer; border-radius: 50%;
-            width: 30px; height: 30px; display: none; align-items: center; justify-content: center; position: absolute; z-index: 2; transition: 0.3s;
+
+        .hero-title {
+            font-size: clamp(3.5rem, 10vw, 7rem);
+            letter-spacing: 0.02em;
+            margin-bottom: 10px;
+            color: var(--text-main);
         }
-        .scroll-arrow:hover { background: var(--discord-blue); }
-        .scroll-left { left: -15px; }
-        .scroll-right { right: -15px; }
-        
-        .dc-avatar { width: 40px; height: 40px; border-radius: 50%; border: 2px solid transparent; transition: 0.3s; flex-shrink: 0; }
-        .dc-avatar:hover { border-color: var(--mc-green); transform: scale(1.2); box-shadow: 0 0 10px var(--mc-green); }
-        .status-online { display: inline-block; width: 12px; height: 12px; border-radius: 50%; background-color: var(--mc-green); margin-right: 8px; box-shadow: 0 0 8px var(--mc-green); }
+
+        .hero-subtitle {
+            font-size: clamp(1rem, 3vw, 1.5rem);
+            color: var(--text-muted);
+            font-weight: 300;
+            margin-bottom: 40px;
+            max-width: 600px;
+        }
+
+        .hero-btn {
+            display: inline-block; padding: 16px 40px; border-radius: 40px;
+            background: var(--text-main); color: var(--bg);
+            font-family: var(--font-sans); font-weight: 700; font-size: 1rem;
+            text-decoration: none; transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s;
+        }
+        .hero-btn:hover { transform: scale(1.05); opacity: 0.9; }
+
+        .marquee-wrapper {
+            position: absolute; bottom: 0; width: 100%; padding: 15px 0;
+            border-top: 1px solid var(--border); background: var(--bg);
+            font-size: 0.85rem; color: var(--text-muted); letter-spacing: 0.05em;
+            display: flex; align-items: center;
+        }
+        .marquee-tag {
+            font-weight: 700; padding: 0 20px; color: var(--text-main); border-right: 1px solid var(--border);
+        }
 
         /* =========================================
-           文章排版與組件
+           主內容區塊排版
            ========================================= */
-        .role-section { background: var(--glass-bg); border-radius: 15px; padding: 25px; margin-bottom: 20px; border: 1px solid var(--glass-border); border-left: 4px solid var(--discord-blue); transition: all 0.3s ease; }
-        .role-section:hover { border-left-color: var(--glow-color); box-shadow: inset 0 0 20px rgba(0,0,0,0.05); }
-        .role-tag { display: inline-block; padding: 4px 12px; border-radius: 6px; background: var(--discord-blue); color: white !important; margin: 4px; font-weight: bold; font-size: 0.85rem; box-shadow: 0 2px 5px rgba(0,0,0,0.2); }
+        .view-section { display: none; width: 100%; padding: 120px 5% 150px; box-sizing: border-box; }
+        .view-section.active { display: block; animation: pageFadeIn 0.5s ease-out forwards; }
+        @keyframes pageFadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
 
-        .hof-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; margin-top: 25px; }
-        .hof-card { width: 180px; background: var(--glass-bg); border-radius: 15px; padding: 20px 15px; text-align: center; border: 1px solid var(--glass-border); transition: 0.3s; cursor: pointer; }
-        .hof-card:hover { transform: translateY(-5px); border-color: #faa61a; box-shadow: 0 10px 30px rgba(250, 166, 26, 0.2); }
-        .boost-card:hover { border-color: #f47fff; box-shadow: 0 10px 30px rgba(244, 127, 255, 0.2); }
-        .hof-avatar { width: 70px; height: 70px; border-radius: 50%; margin-bottom: 10px; border: 2px solid #faa61a; object-fit: cover; }
-        .boost-avatar { border-color: #f47fff; }
-        .hof-id { color: var(--text-muted); font-size: 0.8rem; margin-top: -5px; }
+        .section-header { text-align: center; margin-bottom: 60px; }
+        .section-header h2 { font-size: clamp(2rem, 5vw, 3.5rem); margin-bottom: 15px; }
+        .section-header p { color: var(--text-muted); font-size: 1.1rem; max-width: 600px; margin: 0 auto; }
 
-        .copy-btn { background: rgba(255,255,255,0.1); border: 1px solid var(--glass-border); color: inherit; padding: 2px 8px; border-radius: 4px; cursor: pointer; font-size: 0.8rem; margin-left: 10px; transition: 0.3s; }
-        .copy-btn:hover { background: var(--discord-blue); border-color: var(--discord-blue); color: white; }
+        /* 統一返回按鈕 (取代麵包屑) */
+        .back-btn-container { margin-bottom: 40px; display: flex; align-items: center; }
+        .back-btn {
+            background: none; border: 1px solid var(--border); color: var(--text-main);
+            padding: 10px 24px; border-radius: 30px; cursor: pointer; font-size: 0.9rem;
+            font-weight: 500; transition: 0.3s; display: flex; align-items: center; gap: 8px;
+        }
+        .back-btn:hover { background: var(--text-main); color: var(--bg); }
+
+        /* =========================================
+           Widgets (Discord / MC)
+           ========================================= */
+        .widget-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px; margin-top: 60px; margin-bottom: 80px; max-width: 1200px; margin-left: auto; margin-right: auto;}
         
-        .toc-menu { background: var(--glass-bg); padding: 15px; border-radius: 10px; border: 1px solid var(--glass-border); margin-bottom: 25px; display: flex; gap: 10px; flex-wrap: wrap; }
-        .toc-menu a { color: var(--discord-blue); text-decoration: none; font-size: 0.9rem; font-weight: bold; background: rgba(88, 101, 242, 0.1); padding: 5px 12px; border-radius: 20px; transition: 0.3s; }
-        .toc-menu a:hover { background: var(--discord-blue); color: white; }
+        .widget-box {
+            background: var(--surface); border: 1px solid var(--border); border-radius: 24px;
+            padding: 40px; display: flex; flex-direction: column; align-items: center; text-align: center;
+        }
+        .widget-box h3 { font-size: 1.5rem; margin-bottom: 20px; font-family: var(--font-sans); font-weight: 700; letter-spacing: 0; }
+
+        .mc-info-wrapper {
+            text-align: left; background: var(--bg); padding: 25px; border-radius: 16px; 
+            font-size: 0.95rem; border: 1px solid var(--border); width: 100%; box-sizing: border-box;
+            color: var(--text-muted);
+        }
+        .mc-info-wrapper strong { color: var(--text-main); }
+        .mc-info-wrapper ul { padding-left: 20px; line-height: 1.8; margin: 15px 0; }
+        
+        .copy-btn {
+            background: var(--bg); border: 1px solid var(--border); color: var(--text-main);
+            padding: 8px 16px; border-radius: 20px; cursor: pointer; font-size: 0.85rem; font-weight: bold;
+            transition: 0.3s; margin-top: 20px; display: inline-block;
+        }
+        .copy-btn:hover { background: var(--text-main); color: var(--bg); }
+
+        /* =========================================
+           Editorial Grid (卡片雜誌排版)
+           ========================================= */
+        .editorial-container { max-width: 1200px; margin: 0 auto; }
+        .editorial-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px;
+        }
+        
+        .editorial-card {
+            background: var(--surface); border: 1px solid var(--border); border-radius: 24px;
+            padding: 40px 30px; min-height: 260px; display: flex; flex-direction: column; justify-content: space-between;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); cursor: pointer; text-align: left;
+        }
+        .editorial-card:hover { transform: translateY(-8px); background: var(--surface-hover); border-color: var(--text-muted); }
+        
+        .ed-card-num { font-family: var(--font-serif); font-size: 1.2rem; color: var(--text-muted); font-weight: 400; margin-bottom: 20px; display: block; }
+        .ed-card-title { font-size: 1.8rem; margin-bottom: 12px; color: var(--text-main); }
+        .ed-card-desc { font-size: 0.95rem; color: var(--text-muted); margin: 0; line-height: 1.6; }
+
+        /* =========================================
+           內部文章樣式 (Rules, Privacy 等)
+           ========================================= */
+        .article-content { max-width: 800px; margin: 0 auto; font-size: 1.05rem; line-height: 1.8; color: var(--text-muted); }
+        .article-content h1 { color: var(--text-main); font-size: clamp(2rem, 5vw, 3rem); margin-bottom: 20px; text-align: center; }
+        .article-content h2, .article-content h3 { color: var(--text-main); margin-top: 40px; margin-bottom: 15px; border-bottom: 1px solid var(--border); padding-bottom: 10px; font-family: var(--font-serif); }
+        .article-content p { margin-bottom: 20px; }
+        .article-content b, .article-content strong { color: var(--text-main); }
+        
+        .role-section { background: var(--surface); border-radius: 16px; padding: 30px; margin-bottom: 24px; border: 1px solid var(--border); }
+        .role-tag { display: inline-block; padding: 4px 10px; border-radius: 6px; background: var(--border); color: var(--text-main) !important; margin: 4px; font-size: 0.85rem; font-family: var(--font-sans); }
+
+        .hof-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin-top: 40px; }
+        .hof-card { background: var(--surface); border: 1px solid var(--border); border-radius: 20px; padding: 30px 20px; text-align: center; transition: 0.4s; cursor: pointer; }
+        .hof-card:hover { transform: translateY(-5px); border-color: var(--text-main); }
+        .hof-avatar { width: 80px; height: 80px; border-radius: 50%; margin-bottom: 15px; border: 1px solid var(--border); object-fit: cover; }
+        .hof-id { color: var(--text-muted); font-size: 0.85rem; margin-top: 5px; }
 
         /* 頁尾 */
-        footer { position: fixed; bottom: 0; width: 100%; padding: 15px 0; background: rgba(0,0,0,0.2); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); display: flex; justify-content: center; align-items: center; gap: 15px; font-size: 0.8rem; color: var(--footer-text); border-top: 1px solid var(--glass-border); z-index: 900; }
-        :is([data-theme="light"], [data-theme="matcha"], [data-theme="sakura"], [data-theme="sky"]) footer { background: rgba(255,255,255,0.4); }
-        .footer-link { cursor: pointer; transition: all 0.3s; }
-        .footer-link:hover { color: var(--text-color); text-shadow: 0 0 8px var(--text-color); }
-        .footer-sep { opacity: 0.3; }
-
-        /* 回到頂部按鈕 */
-        #back-to-top {
-            position: fixed; bottom: 70px; right: 25px; width: 45px; height: 45px; border-radius: 50%;
-            background: var(--discord-blue); color: white; border: none; font-size: 1.2rem; cursor: pointer;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.3); opacity: 0; visibility: hidden; transform: translateY(20px);
-            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1); z-index: 1500; display: flex; align-items: center; justify-content: center;
-        }
-        #back-to-top.show { opacity: 1; visibility: visible; transform: translateY(0); }
-        #back-to-top:hover { transform: translateY(-5px) scale(1.1); background: var(--glow-color); box-shadow: 0 8px 20px var(--glow-color); }
+        footer { padding: 40px 5%; background: var(--bg); display: flex; flex-direction: column; align-items: center; gap: 20px; font-size: 0.85rem; color: var(--text-muted); border-top: 1px solid var(--border); }
+        .footer-links { display: flex; gap: 20px; flex-wrap: wrap; justify-content: center; }
+        .footer-link { cursor: pointer; transition: color 0.3s; text-decoration: none; color: inherit; }
+        .footer-link:hover { color: var(--text-main); }
 
         /* =========================================
-           彈窗系統 (Modal) & 吐司通知 (Toast)
+           彈窗系統 (Modal) & 吐司通知
            ========================================= */
-        .modal-bg { display: none; position: fixed; top:0; left:0; width:100%; height:100%; background: rgba(0,0,0,0.6); backdrop-filter: blur(10px); z-index: 2000; align-items: center; justify-content: center;}
-        .modal-body { background-color: var(--bg-color); background-image: var(--bg-image); color: var(--text-color); width: 90%; max-width: 800px; padding: 35px; border-radius: 20px; max-height: 85vh; overflow-y: auto; box-shadow: 0 10px 40px rgba(0,0,0,0.5); border: 1px solid var(--glass-border); animation: modalPop 0.3s ease-out; position: relative; }
+        .modal-bg { display: none; position: fixed; top:0; left:0; width:100%; height:100%; background: rgba(0,0,0,0.8); backdrop-filter: blur(10px); z-index: 2000; align-items: center; justify-content: center;}
+        [data-theme="light"] .modal-bg { background: rgba(255,255,255,0.8); }
+        .modal-body { background: var(--bg); color: var(--text-main); width: 90%; max-width: 500px; padding: 40px; border-radius: 24px; max-height: 85vh; overflow-y: auto; border: 1px solid var(--border); animation: modalPop 0.4s cubic-bezier(0.16, 1, 0.3, 1); position: relative; }
         @keyframes modalPop { 0% { transform: translateY(20px) scale(0.95); opacity: 0; } 100% { transform: translateY(0) scale(1); opacity: 1; } }
 
-        .theme-grid { display: flex; flex-wrap: wrap; gap: 12px; margin: 20px 0; }
-        .theme-btn { flex: 1 1 120px; padding: 15px 10px; border-radius: 10px; cursor: pointer; border: 2px solid transparent; font-weight: bold; font-size: 0.9rem; text-align: center; color: white !important; transition: all 0.2s; box-shadow: 0 4px 6px rgba(0,0,0,0.2); }
-        .theme-btn:hover { transform: translateY(-3px); box-shadow: 0 8px 15px rgba(0,0,0,0.3); }
-        .theme-btn.active { border-color: white; box-shadow: 0 0 15px white; transform: scale(1.05); }
+        .theme-btn { padding: 12px 20px; border-radius: 12px; cursor: pointer; border: 1px solid var(--border); font-weight: 500; font-size: 0.9rem; text-align: center; background: var(--surface); color: var(--text-main); transition: 0.3s; width: 100%; margin-bottom: 10px; box-sizing: border-box; }
+        .theme-btn:hover { background: var(--border); }
+        .theme-btn.active { border-color: var(--text-main); background: var(--text-main); color: var(--bg); }
 
-        .tb-system { background: linear-gradient(135deg, #666, #999); }
-        .tb-dark { background: linear-gradient(135deg, #0a0a0a, #1a1a1a); }
-        .tb-light { background: linear-gradient(135deg, #f0f2f5, #ffffff); color: #000 !important; border: 1px solid #ccc; }
-        .tb-cyberpunk { background: linear-gradient(135deg, #0f2027, #2c5364); }
-        .tb-amethyst { background: linear-gradient(135deg, #1f1c2c, #928dab); }
-        .tb-ocean { background: linear-gradient(135deg, #1cb5e0, #000851); }
-        .tb-sunset { background: linear-gradient(135deg, #c31432, #240b36); }
-        .tb-forest { background: linear-gradient(135deg, #134e5e, #71b280); }
-        .tb-crimson { background: linear-gradient(135deg, #5c0014, #1a0005); }
-        .tb-midnight { background: linear-gradient(135deg, #020024, #090979); }
-        .tb-gold { background: linear-gradient(135deg, #4a3b00, #1a1400); }
-        .tb-neonpink { background: linear-gradient(135deg, #400028, #1a0010); }
-        .tb-aurora { background: linear-gradient(135deg, #004d40, #000000); }
-        .tb-lava { background: linear-gradient(135deg, #8a0303, #000000); }
-        .tb-matcha { background: linear-gradient(135deg, #e8f5e9, #c8e6c9); color: #000 !important; }
-        .tb-sakura { background: linear-gradient(135deg, #fce4ec, #f8bbd0); color: #000 !important; }
-        .tb-sky { background: linear-gradient(135deg, #e1f5fe, #b3e5fc); color: #000 !important; }
-
-        #toast { visibility: hidden; min-width: 250px; background-color: var(--mc-green); color: #fff; text-align: center; border-radius: 8px; padding: 12px; position: fixed; z-index: 3000; left: 50%; bottom: 30px; transform: translateX(-50%); font-weight: bold; box-shadow: 0 5px 15px rgba(0,0,0,0.3); opacity: 0; transition: opacity 0.3s, visibility 0.3s; }
+        #toast { visibility: hidden; min-width: 250px; background-color: var(--text-main); color: var(--bg); text-align: center; border-radius: 30px; padding: 12px 24px; position: fixed; z-index: 3000; left: 50%; bottom: 40px; transform: translateX(-50%); font-weight: bold; opacity: 0; transition: opacity 0.3s, visibility 0.3s; font-family: var(--font-sans); }
         #toast.show { visibility: visible; opacity: 1; }
 
         @media (max-width: 768px) { 
-            nav { height: auto; padding: 15px; flex-direction: column; gap: 10px; } 
-            nav.nav-scrolled { padding: 10px 15px; } 
-            .view-section { padding-top: 150px; }
-            footer { font-size: 0.7rem; gap: 8px; flex-wrap: wrap; }
-            #cursor-glow { display: none; }
-            .theme-grid { display: flex; flex-wrap: nowrap; overflow-x: auto; scroll-snap-type: x mandatory; padding-bottom: 10px; }
-            .theme-btn { flex: 0 0 120px; scroll-snap-align: start; }
-            .scroll-arrow { display: none !important; }
-            .mc-info-box-wrapper { padding: 15px !important; }
+            nav { padding: 15px; } 
+            .hero-title { font-size: 3rem; }
+            .widget-grid { grid-template-columns: 1fr; }
+            .editorial-card { min-height: auto; padding: 30px 20px; }
+            .view-section { padding-top: 100px; }
         }
     </style>
 </head>
 <body data-theme="dark">
 
-<div id="cursor-glow"></div>
 <div id="toast">✅ 已複製到剪貼簿！</div>
 
-<button id="back-to-top" title="回到頂部" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">⬆️</button>
-
-<nav>
-    <div class="logo-box" onclick="goTo('home')">
-        <span style="font-weight: 900; font-size: 1.3rem; letter-spacing: 0.5px;" data-i18n="navHome">PLAYERS’ TAVERN！</span>
-    </div>
+<nav id="navbar">
+    <div class="logo-box" onclick="goTo('home')">TAVERN.</div>
     <div class="nav-right">
-        <a href="http://plays-survival.playwithbao.com/#world:0:0:0:1500:0:0:0:0:perspective" class="btn btn-mc" target="_blank" rel="noopener noreferrer" data-i18n="navMap">⛏️ MC 社群</a>
-        <a href="https://discord.gg/YMqqsQKgWk" class="btn btn-dc" target="_blank" rel="noopener noreferrer" data-i18n="navDiscord">💬 Discord</a>
-        <button class="icon-btn" onclick="toggleModal('theme-modal')" title="背景色彩選擇">🎨</button>
+        <a href="http://plays-survival.playwithbao.com/#world:0:0:0:1500:0:0:0:0:perspective" class="nav-link" target="_blank">社群地圖</a>
+        <a href="https://discord.gg/YMqqsQKgWk" class="nav-link" target="_blank">Discord</a>
         <button class="icon-btn" onclick="toggleModal('settings-modal')" title="網站設定">⚙️</button>
     </div>
 </nav>
 
-<footer>
-    <span class="footer-link" onclick="goTo('privacy')" data-i18n="navPrivacy">隱私權政策</span>
-    <span class="footer-sep">|</span>
-    <span class="footer-link" onclick="goTo('channel')" data-i18n="navChannel">頻道資訊</span>
-    <span class="footer-sep">|</span>
-    <span class="footer-link" onclick="goTo('suggest')" data-i18n="navSuggest">修改建議</span>
-    <span class="footer-sep">|</span>
-    <span class="footer-link" onclick="goTo('terms')" data-i18n="navTerms">使用條款</span>
-    <span class="footer-sep">|</span>
-    <span class="footer-link" onclick="goTo('legal')" data-i18n="navLegal">法律聲明</span>
-</footer>
-
 <div id="content-wrapper">
-    <section id="home" class="view-section active">
-        <h1 class="reveal" style="font-size: clamp(2.2rem, 7vw, 4rem); margin:0; line-height:1.2; text-align: left;" data-i18n="homeTitle">遊戲吧 <span style="color:var(--discord-blue); text-shadow: 0 0 15px var(--glow-color);">Players’ Tavern！</span></h1>
+    <!-- ================= 首頁 (Hero + 資訊區 + 網格) ================= -->
+    <section id="home" class="view-section active" style="padding: 0;">
         
-        <div class="announcement-bar reveal" style="margin-top: 15px; border-radius: 8px;">
-            📢 <marquee scrollamount="5" style="width: 100%;" data-i18n="marqueeMsg">【最新消息】遊戲吧網站全面邁入正式版！全新隱私權條款與深淺色主題系統已上線。</marquee>
-        </div>
+        <header class="hero-section">
+            <h1 class="hero-title">Players' Tavern</h1>
+            <p class="hero-subtitle">專業的跨平台遊戲社群基地</p>
+            <a href="https://discord.gg/YMqqsQKgWk" class="hero-btn" target="_blank">加入社群</a>
+            
+            <div class="marquee-wrapper">
+                <span class="marquee-tag">最新消息</span>
+                <marquee scrollamount="5" style="flex: 1; margin-left: 15px; margin-right: 15px;">遊戲吧網站全面邁入正式版！全新隱私權條款與極簡主題系統已上線。夏日影音企劃將於 2026 年 7 月正式公開！</marquee>
+            </div>
+        </header>
 
-        <div class="widget-flex reveal" style="display:flex; flex-wrap:wrap; gap:20px; margin-top:25px;">
-            <div class="widget-container" style="flex:1; min-width:300px;">
-                <h3 style="margin-top:0; color:var(--discord-blue);" data-i18n="dcStatusTitle">💬 Discord 社群狀態</h3>
-                <div id="dc-skeleton">
-                    <div class="skeleton" style="height: 20px; width: 80%; margin-bottom: 15px;"></div>
-                    <div style="display:flex; gap:10px;">
-                        <div class="skeleton" style="width:40px; height:40px; border-radius:50%;"></div>
-                        <div class="skeleton" style="width:40px; height:40px; border-radius:50%;"></div>
-                        <div class="skeleton" style="width:40px; height:40px; border-radius:50%;"></div>
+        <div class="editorial-container" style="padding: 0 5%; margin-top: 60px;">
+            <!-- Widget 雙欄 (Discord + MC) -->
+            <div class="widget-grid">
+                <div class="widget-box">
+                    <h3 style="color: var(--discord-brand);">Discord 語音社群</h3>
+                    <div style="display: flex; justify-content: center; align-items: center; width: 100%; margin-top: 15px; flex: 1;">
+                        <iframe id="discord-widget-iframe" src="https://discord.com/widget?id=1458066464194957448&theme=dark" width="100%" height="400" allowtransparency="true" frameborder="0" sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts" style="max-width: 350px; border-radius: 16px;"></iframe>
                     </div>
                 </div>
-                <div id="dc-content" style="display: none;">
-                    <div style="font-size: 1rem; font-weight: bold; display: flex; align-items: center; flex-wrap: wrap; gap: 10px;">
-                        <div><span class="status-online"></span> <span id="dc-player-count"></span> <span data-i18n="dcOnlineText">位玩家在線</span></div>
-                        <button class="copy-btn" style="margin:0;" onclick="copyText('https://discord.gg/YMqqsQKgWk')" data-i18n="btnCopyInvite">複製邀請碼</button>
+
+                <div class="widget-box" style="border-color: var(--border);">
+                    <h3 style="color: var(--mc-brand);">Minecraft 伺服器資訊專區</h3>
+                    <div class="mc-info-wrapper">
+                        <p style="margin: 5px 0;"><strong>伺服器位址：</strong> <code style="background: var(--surface-hover); padding: 3px 6px; border-radius: 4px;">plays-survival.playwithbao.com</code></p>
+                        <div style="display: flex; flex-wrap: wrap; gap: 15px; margin: 10px 0;">
+                            <span><strong>基岩版連結埠：</strong> 44750</span>
+                            <span><strong>版本需求：</strong> 1.21.11</span>
+                        </div>
+                        <p style="margin: 5px 0;"><strong>開放時間：</strong> 24小時(維修時會另外宣布)</p>
+                        <p style="margin: 5px 0; word-break: break-all;"><strong>遊戲官網：</strong> <a href="http://plays-survival.playwithbao.com:31031/" target="_blank" style="color: var(--text-main);">官方網站連結</a></p>
+                        
+                        <hr style="border: none; border-top: 1px solid var(--border); margin: 20px 0;">
+                        
+                        <ul style="padding-left: 0; list-style-type: none; margin: 10px 0;">
+                            <li>✔ 尊重他人，不惡意破壞或偷竊</li>
+                            <li>✔ 禁止外掛與作弊</li>
+                            <li>✔ 遵守社群管理員公告</li>
+                            <li>✔ 遊玩前需要前往網站進行驗證</li>
+                        </ul>
+                        <p style="color: var(--text-main); margin: 15px 0; font-weight: bold; background: var(--surface-hover); padding: 12px; border-radius: 8px; border-left: 3px solid var(--text-main);">⚠ 遊玩前請詳讀網頁內容，包括規則、指令</p>
+                        
+                        <hr style="border: none; border-top: 1px solid var(--border); margin: 20px 0;">
+                        
+                        <p style="margin: 5px 0; font-size: 0.9rem;">後臺管理: <span class="role-tag">@【有Bug的蘋果派】欸破死贛</span></p>
+                        <p style="margin: 5px 0; font-size: 0.9rem;">服主: <span class="role-tag">@LichenTempest</span></p>
+                        <p style="margin: 15px 0 5px 0; font-size: 0.9rem;">想要分享建築或作品，可以到 <strong>⁠-《遊戲討論》</strong> 區貼圖 <strong>@Minecraft</strong></p>
                     </div>
-                    <div class="dc-scroll-wrapper">
-                        <button class="scroll-arrow scroll-left" id="dc-scroll-left" onclick="scrollDc(-1)">&#10094;</button>
-                        <div class="dc-member-list" id="dc-members-grid"></div>
-                        <button class="scroll-arrow scroll-right" id="dc-scroll-right" onclick="scrollDc(1)">&#10095;</button>
-                    </div>
+                    <button class="copy-btn" onclick="copyText('plays-survival.playwithbao.com')">複製 IP 位址</button>
                 </div>
             </div>
 
-            <!-- 升級版 Minecraft 伺服器資訊專區 -->
-            <div class="widget-container" style="flex:1; min-width:300px; display: flex; flex-direction: column; border-color: var(--mc-green);">
-                <h3 style="margin-top:0; color:var(--mc-green); font-size: 1.5rem; text-align: center;" data-i18n="mcStatusTitle">⛏️ Minecraft 伺服器資訊專區</h3>
-                
-                <div id="mc-info-box" style="margin-bottom: 20px;" data-i18n="mcInfoBlock">
-                    <!-- 將由 JavaScript 的多語系字典檔自動載入渲染 -->
-                </div>
+            <div class="section-header">
+                <h2>探索基地</h2>
+                <p>了解我們的核心理念、社群資源與最新發展動態。</p>
+            </div>
 
-                <div style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap;">
-                    <button class="btn" style="background: rgba(255,255,255,0.1); border: 1px solid var(--glass-border); color: inherit;" onclick="copyText('plays-survival.playwithbao.com')" data-i18n="btnCopyIp">📋 複製 IP</button>
+            <!-- Editorial Grid (雜誌風卡片) -->
+            <div class="editorial-grid">
+                <div class="editorial-card" onclick="goTo('rules')">
+                    <div>
+                        <span class="ed-card-num">01</span>
+                        <h2 class="ed-card-title">社群規範</h2>
+                        <p class="ed-card-desc">了解並遵守基地的核心行為準則與零容忍政策。</p>
+                    </div>
+                </div>
+                <div class="editorial-card" onclick="goTo('boost')">
+                    <div>
+                        <span class="ed-card-num">02</span>
+                        <h2 class="ed-card-title">加成通知</h2>
+                        <p class="ed-card-desc">感謝為社群提供加成的英雄，查看專屬解鎖特權。</p>
+                    </div>
+                </div>
+                <div class="editorial-card" onclick="goTo('roles')">
+                    <div>
+                        <span class="ed-card-num">03</span>
+                        <h2 class="ed-card-title">身分介紹</h2>
+                        <p class="ed-card-desc">探索創作者認證、管理團隊與各大設備專屬身分組。</p>
+                    </div>
+                </div>
+                <div class="editorial-card" onclick="goTo('hall-of-fame')">
+                    <div>
+                        <span class="ed-card-num">04</span>
+                        <h2 class="ed-card-title">貢獻牆</h2>
+                        <p class="ed-card-desc">致敬那些為社群發展付出極大心力的重要推手。</p>
+                    </div>
+                </div>
+                <div class="editorial-card" onclick="goTo('ticket')">
+                    <div>
+                        <span class="ed-card-num">05</span>
+                        <h2 class="ed-card-title" style="color: var(--ticket-brand);">開票系統</h2>
+                        <p class="ed-card-desc">進行違規檢舉、解除禁言申請或正式事務回報。</p>
+                    </div>
+                </div>
+                <div class="editorial-card" onclick="goTo('channel')">
+                    <div>
+                        <span class="ed-card-num">06</span>
+                        <h2 class="ed-card-title">頻道資訊</h2>
+                        <p class="ed-card-desc">探索我們的 YouTube 頻道與未來的影音創作內容。</p>
+                    </div>
+                </div>
+                <div class="editorial-card" onclick="goTo('news')">
+                    <div>
+                        <span class="ed-card-num">07</span>
+                        <h2 class="ed-card-title">最新公告</h2>
+                        <p class="ed-card-desc">掌握社群最新維護、開發進度與更新日誌。</p>
+                    </div>
                 </div>
             </div>
-        </div>
-        
-        <div class="grid-layout" style="margin-top: 25px;">
-            <div class="info-card reveal" onclick="goTo('rules')"><h2 data-i18n="cardRulesTitle">📜 社群規範</h2><p data-i18n="cardRulesDesc">了解並遵守基地的核心行為準則與零容忍政策。</p></div>
-            <div class="info-card reveal" onclick="goTo('boost')"><h2 data-i18n="cardBoostTitle">💎 加成通知</h2><p data-i18n="cardBoostDesc">感謝為社群提供加成的英雄，查看解鎖特權。</p></div>
-            <div class="info-card reveal" onclick="goTo('roles')"><h2 data-i18n="cardRolesTitle">👤 身分介紹</h2><p data-i18n="cardRolesDesc">了解創作者認證、管理團隊與設備身分組。</p></div>
-            <div class="info-card reveal" onclick="goTo('hall-of-fame')"><h2 data-i18n="cardHofTitle">🏆 貢獻牆</h2><p data-i18n="cardHofDesc">致敬為社群付出的傑出成員與重要推手。</p></div>
-            <div class="info-card reveal" style="border-color: var(--ticket-red);" onclick="goTo('ticket')"><h2 style="color:var(--ticket-red);" data-i18n="cardTicketTitle">🎫 開票系統</h2><p data-i18n="cardTicketDesc">進行違規檢舉、解除禁言申請或正式事務回報。</p></div>
-            <div class="info-card reveal" onclick="goTo('news')"><h2 data-i18n="cardNewsTitle">📢 最新公告</h2><p data-i18n="cardNewsDesc">掌握社群最新維護、開發進度與更新日誌。</p></div>
-            <div class="info-card reveal" onclick="goTo('channel')"><h2 data-i18n="cardChannelTitle">📺 頻道資訊</h2><p data-i18n="cardChannelDesc">探索我們的 YouTube 頻道與影音創作內容。</p></div>
         </div>
     </section>
 
+    <!-- ================= 內部頁面結構 (由 JS 注入內容) ================= -->
     <section id="channel" class="view-section">
-        <div class="breadcrumb"><span class="bc-link" onclick="goTo('home')" data-i18n="bcHome">🏠 首頁</span> / <span data-i18n="bcChannel">📺 頻道資訊</span></div>
-        <div id="channel-area"></div>
+        <div class="back-btn-container"><button class="back-btn" onclick="goTo('home')">← 返回</button></div>
+        <div id="channel-area" class="article-content"></div>
     </section>
 
     <section id="news" class="view-section">
-        <div class="breadcrumb"><span class="bc-link" onclick="goTo('home')" data-i18n="bcHome">🏠 首頁</span> / <span data-i18n="bcNews">📢 最新公告</span></div>
-        <div id="news-area" class="legal-content"></div>
+        <div class="back-btn-container"><button class="back-btn" onclick="goTo('home')">← 返回</button></div>
+        <div id="news-area" class="article-content"></div>
     </section>
 
     <section id="legal" class="view-section">
-        <div class="breadcrumb"><span class="bc-link" onclick="goTo('home')" data-i18n="bcHome">🏠 首頁</span> / <span data-i18n="bcLegal">⚖️ 法律聲明</span></div>
-        <div id="legal-area" class="legal-content"></div>
+        <div class="back-btn-container"><button class="back-btn" onclick="goTo('home')">← 返回</button></div>
+        <div id="legal-area" class="article-content"></div>
     </section>
 
     <section id="rules" class="view-section">
-        <div class="breadcrumb"><span class="bc-link" onclick="goTo('home')" data-i18n="bcHome">🏠 首頁</span> / <span data-i18n="bcRules">📜 社群規範</span></div>
-        <div id="rules-area" class="legal-content"></div>
+        <div class="back-btn-container"><button class="back-btn" onclick="goTo('home')">← 返回</button></div>
+        <div id="rules-area" class="article-content"></div>
     </section>
 
     <section id="boost" class="view-section">
-        <div class="breadcrumb"><span class="bc-link" onclick="goTo('home')" data-i18n="bcHome">🏠 首頁</span> / <span data-i18n="bcBoost">💎 加成通知</span></div>
-        <div id="boost-area"></div>
+        <div class="back-btn-container"><button class="back-btn" onclick="goTo('home')">← 返回</button></div>
+        <div id="boost-area" class="article-content"></div>
     </section>
 
     <section id="hall-of-fame" class="view-section">
-        <div class="breadcrumb"><span class="bc-link" onclick="goTo('home')" data-i18n="bcHome">🏠 首頁</span> / <span data-i18n="bcHof">🏆 貢獻牆</span></div>
-        <div style="text-align: center; margin-bottom: 30px;">
-            <h1 style="color: #faa61a; text-shadow: 0 0 15px rgba(250, 166, 26, 0.4);" data-i18n="pageHofTitle">🏆 貢獻牆 Hall of Fame</h1>
-            <p style="color: var(--text-muted);" data-i18n="pageHofDesc">致敬那些為社群發展、基礎建設與成員福祉付出極大心力的傳奇英雄。<br>點擊成員頭像可查看詳細事蹟。</p>
+        <div class="back-btn-container"><button class="back-btn" onclick="goTo('home')">← 返回</button></div>
+        <div class="article-content">
+            <h1 style="font-size: clamp(2.5rem, 6vw, 4rem); margin-bottom: 10px;">貢獻牆</h1>
+            <p style="text-align: center; font-size: 1.1rem; margin-bottom: 40px;">致敬那些為社群發展、基礎建設與成員福祉付出極大心力的傳奇英雄。<br>點擊成員頭像可查看詳細事蹟。</p>
+            <div id="hof-area" class="hof-grid"></div>
         </div>
-        <div id="hof-area" class="hof-grid"></div>
     </section>
 
     <section id="roles" class="view-section">
-        <div class="breadcrumb"><span class="bc-link" onclick="goTo('home')" data-i18n="bcHome">🏠 首頁</span> / <span data-i18n="bcRoles">👤 身分組介紹</span></div>
-        <div id="roles-area"></div>
+        <div class="back-btn-container"><button class="back-btn" onclick="goTo('home')">← 返回</button></div>
+        <div id="roles-area" class="article-content"></div>
     </section>
 
     <section id="ticket" class="view-section">
-        <div class="breadcrumb"><span class="bc-link" onclick="goTo('home')" data-i18n="bcHome">🏠 首頁</span> / <span data-i18n="bcTicket">🎫 開票系統</span></div>
-        <div id="ticket-area"></div>
-        <div style="text-align:center; margin-top: 30px;">
-            <a href="https://docs.google.com/forms/d/e/1FAIpQLSfvIMxzXlimAY_dKsfqRsVD8qXeigtpyZCYLoGbFJgcEPiqMA/viewform" class="btn btn-dc" style="background:var(--ticket-red); color:white; padding:12px 35px; font-size:1.05rem;" target="_blank" rel="noopener noreferrer" data-i18n="btnCreateTicket">建立支援票單 Create Ticket</a>
+        <div class="back-btn-container"><button class="back-btn" onclick="goTo('home')">← 返回</button></div>
+        <div id="ticket-area" class="article-content"></div>
+        <div style="text-align:center; margin-top: 50px;">
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLSfvIMxzXlimAY_dKsfqRsVD8qXeigtpyZCYLoGbFJgcEPiqMA/viewform" style="display:inline-block; background:var(--text-main); color:var(--bg); padding:16px 40px; font-size:1.1rem; font-weight:bold; text-decoration:none; border-radius:30px; transition: 0.3s;" target="_blank">建立支援票單</a>
         </div>
     </section>
 
     <section id="privacy" class="view-section">
-        <div class="breadcrumb"><span class="bc-link" onclick="goTo('home')" data-i18n="bcHome">🏠 首頁</span> / <span data-i18n="bcPrivacy">🔒 隱私權政策</span></div>
-        <div id="privacy-area" class="legal-content"></div>
+        <div class="back-btn-container"><button class="back-btn" onclick="goTo('home')">← 返回</button></div>
+        <div id="privacy-area" class="article-content"></div>
     </section>
 
     <section id="suggest" class="view-section">
-        <div class="breadcrumb"><span class="bc-link" onclick="goTo('home')" data-i18n="bcHome">🏠 首頁</span> / <span data-i18n="bcSuggest">💡 修改建議</span></div>
-        <div id="suggest-area" class="legal-content"></div>
+        <div class="back-btn-container"><button class="back-btn" onclick="goTo('home')">← 返回</button></div>
+        <div id="suggest-area" class="article-content"></div>
     </section>
 
     <section id="terms" class="view-section">
-        <div class="breadcrumb"><span class="bc-link" onclick="goTo('home')" data-i18n="bcHome">🏠 首頁</span> / <span data-i18n="bcTerms">📝 使用條款</span></div>
-        <div id="terms-area" class="legal-content"></div>
+        <div class="back-btn-container"><button class="back-btn" onclick="goTo('home')">← 返回</button></div>
+        <div id="terms-area" class="article-content"></div>
     </section>
 </div>
 
-<div id="theme-modal" class="modal-bg" onclick="closeModalOnBg(event, 'theme-modal')">
-    <div class="modal-body" style="max-width: 650px;">
-        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom: 15px;">
-            <h2 style="margin:0;" data-i18n="modalThemeTitle">🎨 背景色彩選擇</h2>
-            <button class="icon-btn" onclick="toggleModal('theme-modal')">&times;</button>
-        </div>
-        <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 20px;" data-i18n="modalThemeDesc">選擇您喜歡的主題。點擊「跟隨系統」可自動適應您的裝置深淺色設定。</p>
-        
-        <div class="theme-grid">
-            <div class="theme-btn tb-system" id="th-system" onclick="setSystemTheme()" data-i18n="thSystem">跟隨系統</div>
-            <div class="theme-btn tb-dark" id="th-dark" onclick="setTheme('dark')" data-i18n="thDark">純黑漸變</div>
-            <div class="theme-btn tb-light" id="th-light" onclick="setTheme('light')" data-i18n="thLight">純白漸變</div>
-            <div class="theme-btn tb-cyberpunk" id="th-cyberpunk" onclick="setTheme('cyberpunk')">賽博龐克</div>
-            <div class="theme-btn tb-amethyst" id="th-amethyst" onclick="setTheme('amethyst')">紫水晶</div>
-            <div class="theme-btn tb-ocean" id="th-ocean" onclick="setTheme('ocean')">深海冰洋</div>
-            <div class="theme-btn tb-sunset" id="th-sunset" onclick="setTheme('sunset')">烈日餘暉</div>
-            <div class="theme-btn tb-forest" id="th-forest" onclick="setTheme('forest')">翡翠森林</div>
-            <div class="theme-btn tb-crimson" id="th-crimson" onclick="setTheme('crimson')">猩紅血月</div>
-            <div class="theme-btn tb-midnight" id="th-midnight" onclick="setTheme('midnight')">午夜星空</div>
-            <div class="theme-btn tb-gold" id="th-gold" onclick="setTheme('gold')">奢華流金</div>
-            <div class="theme-btn tb-neonpink" id="th-neonpink" onclick="setTheme('neonpink')">霓虹粉色</div>
-            <div class="theme-btn tb-aurora" id="th-aurora" onclick="setTheme('aurora')">極光幻境</div>
-            <div class="theme-btn tb-lava" id="th-lava" onclick="setTheme('lava')">熔岩黑曜</div>
-            <div class="theme-btn tb-matcha" id="th-matcha" onclick="setTheme('matcha')">抹茶拿鐵</div>
-            <div class="theme-btn tb-sakura" id="th-sakura" onclick="setTheme('sakura')">櫻花盛開</div>
-            <div class="theme-btn tb-sky" id="th-sky" onclick="setTheme('sky')">晴空萬里</div>
-        </div>
-        <button class="btn btn-dc" style="width:100%; margin-top:10px; padding:12px;" onclick="toggleModal('theme-modal')" data-i18n="btnDone">完成設定</button>
+<footer>
+    <div class="footer-links">
+        <span class="footer-link" onclick="goTo('privacy')">隱私權政策</span>
+        <span class="footer-link" onclick="goTo('suggest')">修改建議</span>
+        <span class="footer-link" onclick="goTo('terms')">使用條款</span>
+        <span class="footer-link" onclick="goTo('legal')">法律聲明</span>
     </div>
-</div>
+    <div style="margin-top: 10px; opacity: 0.5;">&copy; 2026 Players' Tavern. All rights reserved.</div>
+</footer>
 
+<!-- 設定彈窗 -->
 <div id="settings-modal" class="modal-bg" onclick="closeModalOnBg(event, 'settings-modal')">
-    <div class="modal-body" style="max-width: 400px; text-align: center;">
-        <button class="icon-btn" style="position:absolute; right:20px; top:15px;" onclick="toggleModal('settings-modal')">&times;</button>
-        <h2 style="margin-top:10px; margin-bottom: 10px;" data-i18n="modalSettingsTitle">⚙️ 網站設定</h2>
-        <p style="color:var(--text-muted); font-size:0.9rem; margin-bottom: 25px;" data-i18n="modalSettingsDesc">管理您的網站本地偏好與語言設定。</p>
+    <div class="modal-body">
+        <button class="icon-btn" style="position:absolute; right:20px; top:20px;" onclick="toggleModal('settings-modal')">&times;</button>
+        <h2 style="margin-bottom: 20px; font-size: 2rem;">網站設定</h2>
         
-        <div style="display:flex; justify-content:center; gap:10px; margin-bottom: 20px;">
-            <button class="btn" style="background:var(--glass-bg); border:1px solid var(--glass-border); color:inherit;" onclick="changeLang('zh')">繁體中文</button>
-            <button class="btn" style="background:var(--glass-bg); border:1px solid var(--glass-border); color:inherit;" onclick="changeLang('en')">English</button>
-        </div>
+        <p style="color:var(--text-muted); margin-bottom: 10px; font-family: var(--font-serif); font-weight:bold;">外觀主題</p>
+        <div class="theme-btn" id="th-system" onclick="setSystemTheme()">跟隨系統</div>
+        <div class="theme-btn" id="th-dark" onclick="setTheme('dark')">深色模式 (預設)</div>
+        <div class="theme-btn" id="th-light" onclick="setTheme('light')">淺色模式</div>
 
-        <button class="btn btn-dc" style="background:var(--ticket-red); width:100%; padding:12px; font-size: 1rem;" onclick="resetWebsite()" data-i18n="btnReset">🔄 重置網站 (恢復預設)</button>
+        <div style="margin-top: 30px; border-top: 1px solid var(--border); padding-top: 20px;">
+            <button class="theme-btn" style="border:none; background: var(--text-main); color: var(--bg);" onclick="resetWebsite()">恢復預設設定</button>
+        </div>
     </div>
 </div>
 
+<!-- HOF 彈窗 -->
 <div id="hof-modal" class="modal-bg" onclick="closeModalOnBg(event, 'hof-modal')">
-    <div class="modal-body" style="max-width: 500px; text-align: center;">
-        <button class="icon-btn" style="position:absolute; right:20px; top:15px;" onclick="toggleModal('hof-modal')">&times;</button>
-        <img id="hof-modal-avatar" src="" loading="lazy" style="width:100px; height:100px; border-radius:50%; margin: 10px auto 15px; border: 3px solid #faa61a; object-fit: cover;">
-        <h2 id="hof-modal-name" style="margin:0 0 5px;"></h2>
-        <p id="hof-modal-id" style="color:var(--text-muted); margin-top:0; font-size: 0.9rem;"></p>
-        <div id="hof-modal-tags" style="margin-bottom: 20px;"></div>
-        <p id="hof-modal-desc" style="text-align:left; font-size: 0.95rem; line-height: 1.6; background: rgba(0,0,0,0.1); padding: 15px; border-radius: 10px;"></p>
+    <div class="modal-body" style="text-align: center;">
+        <button class="icon-btn" style="position:absolute; right:20px; top:20px;" onclick="toggleModal('hof-modal')">&times;</button>
+        <img id="hof-modal-avatar" src="" loading="lazy" style="width:100px; height:100px; border-radius:50%; margin: 0 auto 20px; border: 1px solid var(--border); object-fit: cover;">
+        <h2 id="hof-modal-name" style="margin:0 0 5px; font-size: 2rem;"></h2>
+        <p id="hof-modal-id" style="color:var(--text-muted); margin-top:0; font-size: 0.9rem; font-family: var(--font-sans);"></p>
+        <div id="hof-modal-tags" style="margin-bottom: 25px;"></div>
+        <p id="hof-modal-desc" style="text-align:left; font-size: 1rem; line-height: 1.8; background: var(--surface-hover); padding: 25px; border-radius: 16px; border: 1px solid var(--border);"></p>
     </div>
 </div>
 
 <script>
-    const serverID = "1458066464194957448";
-
-    // 🏆 貢獻牆與雙語文本庫
-    let currentLang = 'zh';
-
-    const translations = {
-        zh: {
-            navHome: "PLAYERS’ TAVERN！", navMap: "⛏️ MC 社群", navDiscord: "💬 Discord",
-            navPrivacy: "隱私權政策", navChannel: "頻道資訊", navSuggest: "修改建議", navTerms: "使用條款", navLegal: "法律聲明",
-            homeTitle: "遊戲吧 <span style=\"color:var(--discord-blue); text-shadow: 0 0 15px var(--glow-color);\">Players’ Tavern！</span>",
-            marqueeMsg: "【最新消息】遊戲吧網站全面邁入正式版！全新隱私權條款與深淺色主題系統已上線。",
-            dcStatusTitle: "💬 Discord 社群狀態", dcOnlineText: "位玩家在線", btnCopyInvite: "複製邀請碼",
-            mcStatusTitle: "⛏️ Minecraft 伺服器資訊專區", btnCopyIp: "📋 複製 IP",
-            cardRulesTitle: "📜 社群規範", cardRulesDesc: "了解並遵守基地的核心行為準則與零容忍政策。",
-            cardBoostTitle: "💎 加成通知", cardBoostDesc: "感謝為社群提供加成的英雄，查看解鎖特權。",
-            cardRolesTitle: "👤 身分介紹", cardRolesDesc: "了解創作者認證、管理團隊與設備身分組。",
-            cardHofTitle: "🏆 貢獻牆", cardHofDesc: "致敬為社群付出的傑出成員與重要推手。",
-            cardTicketTitle: "🎫 開票系統", cardTicketDesc: "進行違規檢舉、解除禁言申請或正式事務回報。",
-            cardNewsTitle: "📢 最新公告", cardNewsDesc: "掌握社群最新維護、開發進度與更新日誌。",
-            cardChannelTitle: "📺 頻道資訊", cardChannelDesc: "探索我們的 YouTube 頻道與影音創作內容。",
-            bcHome: "🏠 首頁", bcNews: "📢 最新公告", bcLegal: "⚖️ 法律聲明", bcRules: "📜 社群規範", bcBoost: "💎 加成通知", bcHof: "🏆 貢獻牆", bcRoles: "👤 身分組介紹", bcTicket: "🎫 開票系統", bcPrivacy: "🔒 隱私權政策", bcChannel: "📺 頻道資訊", bcSuggest: "💡 修改建議", bcTerms: "📝 使用條款",
-            pageHofTitle: "🏆 貢獻牆 Hall of Fame", pageHofDesc: "致敬那些為社群發展、基礎建設與成員福祉付出極大心力的傳奇英雄。<br>點擊成員頭像可查看詳細事蹟。",
-            btnCreateTicket: "建立支援票單 Create Ticket",
-            modalThemeTitle: "🎨 背景色彩選擇", modalThemeDesc: "選擇您喜歡的主題。點擊「跟隨系統」可自動適應您的裝置深淺色設定。", thSystem: "跟隨系統", thDark: "純黑漸變", thLight: "純白漸變", btnDone: "完成設定",
-            modalSettingsTitle: "⚙️ 網站設定", modalSettingsDesc: "管理您的網站本地偏好與語言設定。", btnReset: "🔄 重置網站 (恢復預設)",
-            toastCopied: "✅ 已複製到剪貼簿！", toastReset: "✅ 網站設定已重置！", dcConnectFail: "⚠️ 連線失敗：請確認 Discord 伺服器的 Widget (小工具) 是否已開啟。",
-            mcInfoBlock: `
-                <div class="mc-info-box-wrapper" style="text-align: left; background: rgba(0,0,0,0.2); padding: 20px; border-radius: 12px; font-size: 0.95rem; border: 1px solid rgba(59, 165, 92, 0.3);">
-                    <p style="margin: 5px 0;"><strong>伺服器位址：</strong> <code style="background: rgba(0,0,0,0.5); padding: 2px 6px; border-radius: 4px; color:var(--text-color);">plays-survival.playwithbao.com</code></p>
-                    <div style="display: flex; flex-wrap: wrap; gap: 15px; margin: 5px 0;">
-                        <span><strong>基岩版連結埠：</strong> 44750</span>
-                        <span><strong>版本需求：</strong> 1.21.11</span>
-                    </div>
-                    <p style="margin: 5px 0;"><strong>開放時間：</strong> 24小時(維修時會另外宣布)</p>
-                    <p style="margin: 5px 0; word-break: break-all;"><strong>遊戲官網：</strong> <a href="http://plays-survival.playwithbao.com:31031/" target="_blank" style="color: var(--discord-blue); text-decoration: none;">http://plays-survival.playwithbao.com:31031/</a></p>
-                    
-                    <hr style="border: none; border-top: 1px solid var(--glass-border); margin: 15px 0;">
-                    
-                    <ul style="padding-left: 0; list-style-type: none; margin: 10px 0; color: var(--text-muted); line-height: 1.8;">
-                        <li>✔ 尊重他人，不惡意破壞或偷竊</li>
-                        <li>✔ 禁止外掛與作弊</li>
-                        <li>✔ 遵守社群管理員公告</li>
-                        <li>✔ 遊玩前需要前往網站進行驗證</li>
-                    </ul>
-                    <p style="color: #faa61a; margin: 10px 0; font-weight: bold; background: rgba(250, 166, 26, 0.1); padding: 8px; border-radius: 6px; border-left: 4px solid #faa61a;">⚠ 遊玩前請詳讀網頁內容,包括規則,指令</p>
-                    
-                    <hr style="border: none; border-top: 1px solid var(--glass-border); margin: 15px 0;">
-                    
-                    <p style="margin: 5px 0; font-size: 0.9rem; color: var(--text-muted);">後臺管理: <span class="role-tag" style="background:#9b59b6; margin: 0 4px;">@【有Bug的蘋果派】欸破死贛</span></p>
-                    <p style="margin: 5px 0; font-size: 0.9rem; color: var(--text-muted);">服主: <span class="role-tag" style="background:#e74c3c; margin: 0 4px;">@LichenTempest</span></p>
-                    <p style="margin: 10px 0 5px 0; font-size: 0.9rem; color: var(--text-muted);">想要分享建築或作品，可以到 <strong style="color: var(--text-color);">⁠-《遊戲討論》</strong> 區貼圖 <span style="color: var(--discord-blue); font-weight: bold;">@Minecraft</span></p>
-                </div>
-            `
-        },
-        en: {
-            navHome: "PLAYERS’ TAVERN!", navMap: "⛏️ MC Community", navDiscord: "💬 Discord",
-            navPrivacy: "Privacy", navChannel: "Channel Info", navSuggest: "Feedback", navTerms: "Terms", navLegal: "Legal",
-            homeTitle: "Welcome to <span style=\"color:var(--discord-blue); text-shadow: 0 0 15px var(--glow-color);\">Players’ Tavern!</span>",
-            marqueeMsg: "【Latest】 The site is officially launched with full English support and a new privacy policy!",
-            dcStatusTitle: "💬 Discord Status", dcOnlineText: "Players Online", btnCopyInvite: "Copy Invite",
-            mcStatusTitle: "⛏️ Minecraft Server Info", btnCopyIp: "📋 Copy IP",
-            cardRulesTitle: "📜 Rules", cardRulesDesc: "Read our core community guidelines and zero-tolerance policy.",
-            cardBoostTitle: "💎 Boosters", cardBoostDesc: "Thanks to our server boosters. View your perks.",
-            cardRolesTitle: "👤 Roles", cardRolesDesc: "Learn about creator verification, admin team, and platform roles.",
-            cardHofTitle: "🏆 Hall of Fame", cardHofDesc: "Tribute to outstanding members who built this community.",
-            cardTicketTitle: "🎫 Tickets", cardTicketDesc: "Report violations, appeal bans, or contact staff.",
-            cardNewsTitle: "📢 News", cardNewsDesc: "Keep up with community updates and dev logs.",
-            cardChannelTitle: "📺 Channel Info", cardChannelDesc: "Explore our YouTube channel and video content.",
-            bcHome: "🏠 Home", bcNews: "📢 News", bcLegal: "⚖️ Legal", bcRules: "📜 Rules", bcBoost: "💎 Boosters", bcHof: "🏆 Hall of Fame", bcRoles: "👤 Roles", bcTicket: "🎫 Tickets", bcPrivacy: "🔒 Privacy", bcChannel: "📺 Channel Info", bcSuggest: "💡 Feedback", bcTerms: "📝 Terms",
-            pageHofTitle: "🏆 Hall of Fame", pageHofDesc: "Tribute to legends who dedicated immense effort to community development.<br>Click avatars for details.",
-            btnCreateTicket: "Create Support Ticket",
-            modalThemeTitle: "🎨 Theme Color", modalThemeDesc: "Choose a theme. 'System' adapts to your device's dark/light mode.", thSystem: "System", thDark: "Dark Fade", thLight: "Light Fade", btnDone: "Done",
-            modalSettingsTitle: "⚙️ Settings", modalSettingsDesc: "Manage local preferences and language.", btnReset: "🔄 Reset Website",
-            toastCopied: "✅ Copied to clipboard!", toastReset: "✅ Settings reset!", dcConnectFail: "⚠️ Connection failed: Discord Widget might be disabled.",
-            mcInfoBlock: `
-                <div class="mc-info-box-wrapper" style="text-align: left; background: rgba(0,0,0,0.2); padding: 20px; border-radius: 12px; font-size: 0.95rem; border: 1px solid rgba(59, 165, 92, 0.3);">
-                    <p style="margin: 5px 0;"><strong>Server Address:</strong> <code style="background: rgba(0,0,0,0.5); padding: 2px 6px; border-radius: 4px; color:var(--text-color);">plays-survival.playwithbao.com</code></p>
-                    <div style="display: flex; flex-wrap: wrap; gap: 15px; margin: 5px 0;">
-                        <span><strong>Bedrock Port:</strong> 44750</span>
-                        <span><strong>Version:</strong> 1.21.11</span>
-                    </div>
-                    <p style="margin: 5px 0;"><strong>Uptime:</strong> 24/7 (Maintenance will be announced)</p>
-                    <p style="margin: 5px 0; word-break: break-all;"><strong>Website:</strong> <a href="http://plays-survival.playwithbao.com:31031/" target="_blank" style="color: var(--discord-blue); text-decoration: none;">http://plays-survival.playwithbao.com:31031/</a></p>
-                    
-                    <hr style="border: none; border-top: 1px solid var(--glass-border); margin: 15px 0;">
-                    
-                    <ul style="padding-left: 0; list-style-type: none; margin: 10px 0; color: var(--text-muted); line-height: 1.8;">
-                        <li>✔ Respect others, no griefing or stealing</li>
-                        <li>✔ No hacks or cheats</li>
-                        <li>✔ Follow admin announcements</li>
-                        <li>✔ Website verification required before playing</li>
-                    </ul>
-                    <p style="color: #faa61a; margin: 10px 0; font-weight: bold; background: rgba(250, 166, 26, 0.1); padding: 8px; border-radius: 6px; border-left: 4px solid #faa61a;">⚠ Please read website rules and commands before playing</p>
-                    
-                    <hr style="border: none; border-top: 1px solid var(--glass-border); margin: 15px 0;">
-                    
-                    <p style="margin: 5px 0; font-size: 0.9rem; color: var(--text-muted);">Backend Admin: <span class="role-tag" style="background:#9b59b6; margin: 0 4px;">@【有Bug的蘋果派】欸破死贛</span></p>
-                    <p style="margin: 5px 0; font-size: 0.9rem; color: var(--text-muted);">Owner: <span class="role-tag" style="background:#e74c3c; margin: 0 4px;">@LichenTempest</span></p>
-                    <p style="margin: 10px 0 5px 0; font-size: 0.9rem; color: var(--text-muted);">Share builds in <strong style="color: var(--text-color);">⁠-《Game Discussion》</strong> & tag <span style="color: var(--discord-blue); font-weight: bold;">@Minecraft</span></p>
-                </div>
-            `
-        }
-    };
-
+    // ==========================================
+    // 內部資料庫 (僅保留繁體中文，徹底移除英文介面)
+    // ==========================================
     const hofData_zh = [
-        { name: "Dy", id: "dyson_2011", avatar: "https://ui-avatars.com/api/?name=Dy&background=8B7355&color=fff&size=128", tags: `<span class="role-tag" style="background:#faa61a; color:black;">最高貢獻者</span> <span class="role-tag" style="background:#f1c40f; color:black;">HR</span>`, desc: "群組的 HR 人事與管理員。我一手建立了這個網站、重新設計了社群規範、創建了票務表單系統，並致力於解決社群成員遇到的許多問題與大小事。" },
-        { name: "【有Bug的蘋果皮】欸破死贛", id: "apple_skin.", avatar: "https://ui-avatars.com/api/?name=蘋&background=4b0082&color=fff&size=128", tags: `<span class="role-tag" style="background:#9b59b6; color:white;">社群開發者</span>`, desc: "一手打造了遊戲吧的 Minecraft 社群網站以及伺服器等功能，是奠定社群基礎建設不可或缺的重大推手。" }
-    ];
-    const hofData_en = [
-        { name: "Dy", id: "dyson_2011", avatar: "https://ui-avatars.com/api/?name=Dy&background=8B7355&color=fff&size=128", tags: `<span class="role-tag" style="background:#faa61a; color:black;">Top Contributor</span> <span class="role-tag" style="background:#f1c40f; color:black;">HR</span>`, desc: "Server HR and Admin. Built this website, redesigned rules, created the ticket system, and dedicated to solving community issues." },
-        { name: "Apple Skin", id: "apple_skin.", avatar: "https://ui-avatars.com/api/?name=A&background=4b0082&color=fff&size=128", tags: `<span class="role-tag" style="background:#9b59b6; color:white;">Developer</span>`, desc: "Built the Minecraft community web features and server functions. A vital pioneer in establishing our infrastructure." }
+        { name: "Dy", id: "dyson_2011", avatar: "https://ui-avatars.com/api/?name=Dy&background=000&color=fff&size=128", tags: `<span class="role-tag">最高貢獻者</span> <span class="role-tag">HR</span>`, desc: "群組的 HR 人事與管理員。我一手建立了這個網站、重新設計了社群規範、創建了票務表單系統，並致力於解決社群成員遇到的許多問題與大小事。" },
+        { name: "【有Bug的蘋果皮】欸破死贛", id: "apple_skin.", avatar: "https://ui-avatars.com/api/?name=蘋&background=333&color=fff&size=128", tags: `<span class="role-tag">社群開發者</span>`, desc: "一手打造了遊戲吧的 Minecraft 社群網站以及伺服器等功能，是奠定社群基礎建設不可或缺的重大推手。" }
     ];
 
     const contentData_zh = {
-        boost: `<div style="text-align: center; margin-bottom: 30px;"><h1 style="color: #f47fff; text-shadow: 0 0 15px rgba(244, 127, 255, 0.4);">💎 加成守護者</h1><p style="color: var(--text-muted);">感謝以下為「遊戲吧 Players’ Tavern！」提供伺服器加成（Boost）的守護者，因為有你們，社群才能更加茁壯！</p></div>
-            <div class="hof-grid">
-                <div class="hof-card boost-card"><img src="https://ui-avatars.com/api/?name=Dy&background=8B7355&color=fff&size=128" loading="lazy" class="hof-avatar boost-avatar" alt="Dy"><h3 style="margin: 5px 0;">Dy</h3><p class="hof-id">dyson_2011</p><div><span class="role-tag" style="background:#f47fff; color:white; text-shadow:none;">Server Booster</span></div></div>
-                <div class="hof-card boost-card"><img src="https://ui-avatars.com/api/?name=鬼鬼&background=333&color=fff&size=128" loading="lazy" class="hof-avatar boost-avatar" alt="鬼鬼"><h3 style="margin: 5px 0;">鬼鬼</h3><p class="hof-id">xiao.</p><div><span class="role-tag" style="background:#f47fff; color:white; text-shadow:none;">Server Booster</span></div></div>
-                <div class="hof-card boost-card"><img src="https://ui-avatars.com/api/?name=Bobo&background=87CEEB&color=fff&size=128" loading="lazy" class="hof-avatar boost-avatar" alt="Tiny Bobo"><h3 style="margin: 5px 0;">Tiny Bobo</h3><p class="hof-id">bobo7755137_29015</p><div><span class="role-tag" style="background:#f47fff; color:white; text-shadow:none;">Server Booster</span></div></div>
+        boost: `<h1>加成守護者</h1><p style="text-align:center;">感謝以下為「遊戲吧 Players’ Tavern！」提供伺服器加成的守護者，因為有你們，社群才能更加茁壯！</p>
+            <div class="hof-grid" style="margin-top: 50px;">
+                <div class="hof-card"><img src="https://ui-avatars.com/api/?name=Dy&background=000&color=fff&size=128" loading="lazy" class="hof-avatar" alt="Dy"><h3 style="margin: 5px 0;">Dy</h3><p class="hof-id">dyson_2011</p><div><span class="role-tag">Server Booster</span></div></div>
+                <div class="hof-card"><img src="https://ui-avatars.com/api/?name=鬼鬼&background=333&color=fff&size=128" loading="lazy" class="hof-avatar" alt="鬼鬼"><h3 style="margin: 5px 0;">鬼鬼</h3><p class="hof-id">xiao.</p><div><span class="role-tag">Server Booster</span></div></div>
+                <div class="hof-card"><img src="https://ui-avatars.com/api/?name=Bobo&background=111&color=fff&size=128" loading="lazy" class="hof-avatar" alt="Tiny Bobo"><h3 style="margin: 5px 0;">Tiny Bobo</h3><p class="hof-id">bobo7755137_29015</p><div><span class="role-tag">Server Booster</span></div></div>
             </div>`,
-        channel: `<div style="text-align: center; margin-bottom: 30px;">
-                <h1 style="color: var(--discord-blue); text-shadow: 0 0 15px var(--glow-color);" data-i18n="navChannel">頻道資訊</h1>
-            </div>
-            <div class="role-section" style="text-align: center; padding: 40px 20px; border-left-color: var(--discord-blue); display: flex; flex-direction: column; align-items: center;">
-                <h2 style="color: var(--text-color); font-size: clamp(1.8rem, 5vw, 2.5rem); margin-bottom: 10px; text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);">夏日影音，敬請期待</h2>
-                <p style="color: var(--text-muted); font-size: 1.1rem; margin-top: 0; margin-bottom: 30px;">頻道正式公開的日期為2026年7月夏季</p>
-                <div style="width: 100%; max-width: 500px; border-radius: 15px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.5); border: 1px solid var(--glass-border);">
-                    <img src="https://github.com/Dyson201101010/players-tavern/blob/main/assets/9f94d003-c298-4ef7-a640-f05ac1e73be0_upscayl_5x_upscayl-standard-4x.png?raw=true" alt="夏日影音，敬請期待" style="width: 100%; height: auto; display: block;" onerror="this.src='https://placehold.co/600x800/1a1a1a/d4af37?text=Summer+Video+Coming+Soon'">
+        channel: `
+            <div style="text-align: center; padding: 20px 0;">
+                <h1 style="font-size: clamp(2.5rem, 6vw, 4rem); margin-bottom: 20px;">夏日影音，敬請期待</h1>
+                <p style="font-size: 1.2rem; margin-bottom: 50px;">頻道正式公開的日期為 2026 年 7 月夏季</p>
+                <div style="width: 100%; max-width: 600px; margin: 0 auto; border-radius: 24px; overflow: hidden; border: 1px solid var(--border);">
+                    <img src="https://github.com/Dyson201101010/players-tavern/blob/main/assets/9f94d003-c298-4ef7-a640-f05ac1e73be0_upscayl_5x_upscayl-standard-4x.png?raw=true" alt="夏日影音，敬請期待" style="width: 100%; height: auto; display: block;" onerror="this.src='https://placehold.co/600x800/1a1a1a/ffffff?text=Summer+Video'">
                 </div>
             </div>`,
-        roles: `<h1>👤 伺服器身分組介紹</h1>
-            <div class="role-section"><h3 style="color:var(--discord-blue); margin-top:0;">【基礎成員】 — 初來乍到的冒險者</h3><p><span class="role-tag">@旅行者</span> ：伺服器的核心成員，完成入群驗證後的標準身分。</p><p><span class="role-tag">@手機玩家</span> <span class="role-tag">@手柄玩家</span> <span class="role-tag">@電腦玩家</span> ：設備標籤，協助成員快速尋找同平台的遊玩夥伴。</p><p><span class="role-tag" style="background:#ff0000; text-shadow:none;">@YouTube</span> ：創作者認證位階。獲得條件：頻道達 <b>500 訂閱</b> 且影片平均播放量達 <b>100 次</b> 以上。</p></div>
-            <div class="role-section"><h3 style="color:var(--discord-blue); margin-top:0;">【通知設置】 — 掌握第一手資訊</h3><p><span class="role-tag">@公告通知</span> ：伺服器重大更新、功能變動或規則調整之通知。</p><p><span class="role-tag">@投票通知</span> ：社群決策參與，當有提案需要成員共識時提醒。</p><p><span class="role-tag">@抽獎通知</span> ：福利發放專屬通知，不遺漏任何獲得獎勵的機會。</p></div>
-            <div class="role-section"><h3 style="color:var(--discord-blue); margin-top:0;">【管理團隊】 — 維護秩序的守護者</h3><p><span class="role-tag">@版主</span> ：第一線管理人員，負責聊天區域的秩序維護、違規內容清理及糾紛初步調解。</p><p><span class="role-tag">@管理員</span> ：高階管理權限，負責伺服器架構優化、機器人設置及重大違規之懲處執行。</p><p><span class="role-tag">@運營總監COO (人力資源)</span> ：專責招募管理團隊與審核身分申請。維護成員互動環境，協助調解成員爭端並優化社群規範。</p></div>
-            <div class="role-section"><h3 style="color:var(--discord-blue); margin-top:0;">【榮譽與貢獻】 — 感謝您的支持</h3><p><span class="role-tag" style="background:#faa61a; color:black; text-shadow:none;">@金主爸爸</span> ：伺服器贊助者專屬榮譽，提供伺服器加成（Boost）或捐贈抽獎獎品者獲得。</p></div>`,
-        ticket: `<h1>🎫 開票系統說明</h1>
-            <div style="background:rgba(237, 66, 69, 0.05); border-left: 5px solid var(--ticket-red); padding: 25px; border-radius: 12px; backdrop-filter:blur(5px);">
-                <h3 style="color:var(--ticket-red); margin-top:0;">💡 開票系統使用說明</h3>
+        roles: `<h1>伺服器身分組介紹</h1>
+            <div class="role-section"><h3>【基礎成員】 — 初來乍到的冒險者</h3><p><span class="role-tag">@旅行者</span> ：伺服器的核心成員，完成入群驗證後的標準身分。</p><p><span class="role-tag">@手機玩家</span> <span class="role-tag">@手柄玩家</span> <span class="role-tag">@電腦玩家</span> ：設備標籤，協助成員快速尋找同平台的遊玩夥伴。</p><p><span class="role-tag">@YouTube</span> ：創作者認證位階。獲得條件：頻道達 <b>500 訂閱</b> 且影片平均播放量達 <b>100 次</b> 以上。</p></div>
+            <div class="role-section"><h3>【通知設置】 — 掌握第一手資訊</h3><p><span class="role-tag">@公告通知</span> ：伺服器重大更新、功能變動或規則調整之通知。</p><p><span class="role-tag">@投票通知</span> ：社群決策參與，當有提案需要成員共識時提醒。</p><p><span class="role-tag">@抽獎通知</span> ：福利發放專屬通知，不遺漏任何獲得獎勵的機會。</p></div>
+            <div class="role-section"><h3>【管理團隊】 — 維護秩序的守護者</h3><p><span class="role-tag">@版主</span> ：第一線管理人員，負責聊天區域的秩序維護、違規內容清理及糾紛初步調解。</p><p><span class="role-tag">@管理員</span> ：高階管理權限，負責伺服器架構優化、機器人設置及重大違規之懲處執行。</p><p><span class="role-tag">@運營總監COO (人力資源)</span> ：專責招募管理團隊與審核身分申請。維護成員互動環境，協助調解成員爭端並優化社群規範。</p></div>
+            <div class="role-section"><h3>【榮譽與貢獻】 — 感謝您的支持</h3><p><span class="role-tag">@金主爸爸</span> ：伺服器贊助者專屬榮譽，提供伺服器加成（Boost）或捐贈抽獎獎品者獲得。</p></div>`,
+        ticket: `<h1>開票系統說明</h1>
+            <div style="background:var(--surface-hover); padding: 40px; border-radius: 24px; border: 1px solid var(--border);">
+                <h3>💡 系統使用說明</h3>
                 <p>歡迎來到<b>《－開票》</b>頻道！本系統主要用於以下兩種用途：</p>
-                <h4 style="margin-bottom:5px;">1. 解除禁言／誤封鎖申請</h4>
-                <p style="font-size:0.9rem; color:var(--text-muted);">若你認為被誤判，請開票並提供：被處分時間/頻道、當時情況、認為是誤判的原因。</p>
-                <h4 style="margin-bottom:5px;">2. 檢舉成員行為</h4>
-                <p style="font-size:0.9rem; color:var(--text-muted);">若發現成員違規（騷擾、洗頻等），請開票並提供：被檢舉者ID、時間/頻道、違規具體行為(附截圖)。</p>
-                <p style="font-weight:bold; margin-top:15px; color:var(--ticket-red);">⚠️ 請勿濫用票務系統，惡意開票者將依規則處理。我們會保護檢舉者的匿名性。</p>
+                <h4 style="margin-top:30px; margin-bottom:10px;">1. 解除禁言／誤封鎖申請</h4>
+                <p>若你認為被誤判，請開票並提供：被處分時間/頻道、當時情況、認為是誤判的原因。</p>
+                <h4 style="margin-top:30px; margin-bottom:10px;">2. 檢舉成員行為</h4>
+                <p>若發現成員違規（騷擾、洗頻等），請開票並提供：被檢舉者ID、時間/頻道、違規具體行為(附截圖)。</p>
+                <p style="margin-top:30px; padding-top: 20px; border-top: 1px solid var(--border);">⚠ 請勿濫用票務系統，惡意開票者將依規則處理。我們會保護檢舉者的匿名性。</p>
             </div>`,
-        rules: `<h1 style="color:var(--discord-blue);">📜 社群規範</h1><p style="color:var(--text-muted);">(2026/03/18 更新版)</p>
-            <div class="toc-menu"><a href="#r-1">一、 核心行為</a><a href="#r-2">二、 遊戲版權</a><a href="#r-3">三、 頻道語音</a><a href="#r-4">四、 反廣告</a><a href="#r-5">五、 處分機制</a></div>
-            <div class="role-section" style="border-left-color: #f1c40f;" id="r-1"><h3 style="margin-top:0;">一、 核心行為準則與零容忍政策</h3>
+        rules: `<h1>社群規範</h1><p style="text-align:center;">(2026/03/18 更新版)</p>
+            <div class="role-section" style="margin-top: 50px;"><h3>一、 核心行為準則與零容忍政策</h3>
                 <p><b>尊重與友善交流：</b>嚴禁針對他人發布仇恨言論、歧視、人身攻擊、霸凌或惡意騷擾。無論是針對種族、性別、性向或宗教的攻擊，本伺服器皆採零容忍政策。（宣洩情緒髒話可以接受但請別特別針對他人）</p>
                 <p><b>禁止侵犯隱私 (Doxxing)：</b>絕對禁止肉搜、散布或威脅散布任何成員的真實姓名、照片、住址或聯絡方式等個人隱私資訊。</p>
                 <p><b>禁止不當內容：</b>嚴禁發布、連結或暗示任何包含色情（NSFW）、極端暴力、血腥或違反兒少保護的內容。</p>
                 <p><b>禁止政治與敏感爭議：</b>為保持遊戲社群的純粹性，請避免在公共頻道引起激烈的政治、宗教或社會爭議辯論。</p>
             </div>
-            <div class="role-section" style="border-left-color: #f1c40f;" id="r-2"><h3 style="margin-top:0;">二、 遊戲與版權規範</h3><p><b>尊重智慧財產權：</b>禁止分享盜版遊戲載點、非法破解軟體、未經授權的伺服器架設檔案或其他侵權內容。</p></div>
-            <div class="role-section" style="border-left-color: #f1c40f;" id="r-3"><h3 style="margin-top:0;">三、 頻道與語音使用規範</h3>
+            <div class="role-section"><h3>二、 遊戲與版權規範</h3><p><b>尊重智慧財產權：</b>禁止分享盜版遊戲載點、非法破解軟體、未經授權的伺服器架設檔案或其他侵權內容。</p></div>
+            <div class="role-section"><h3>三、 頻道與語音使用規範</h3>
                 <p><b>分類與揪團禮儀：</b>請依照各頻道的設立主題進行討論。尋找遊戲夥伴請使用專屬的「揪團頻道」，並善用遊戲身分組標記，嚴禁濫用 @everyone 或 @here。</p>
                 <p><b>語音頻道秩序：</b>進入語音頻道請保持基本禮儀。嚴禁使用變聲器惡意干擾、大聲喧嘩（Mic Spamming）或播放刺耳噪音。</p>
                 <p><b>第三方工具使用：</b>若需使用音樂機器人或音效板（Soundpad），必須先徵求該語音頻道內其他成員的同意。</p>
             </div>
-            <div class="role-section" style="border-left-color: #f1c40f;" id="r-4"><h3 style="margin-top:0;">四、 反垃圾訊息與廣告規範</h3>
+            <div class="role-section"><h3>四、 反垃圾訊息與廣告規範</h3>
                 <p><b>禁止惡意洗版：</b>嚴禁任何形式的灌水、洗頻（Spamming）、無意義的短暫連續發言，或惡意刷出大量貼圖與 GIF。</p>
                 <p><b>限制廣告與推銷：</b>未經管理團隊明確授權，禁止在任何頻道（包含私訊成員）發布商業廣告、其他 Discord 伺服器邀請連結或個人頻道推廣。</p>
                 <p><b>禁止冒充身分：</b>嚴禁冒用管理員身分、使用易混淆的管理員頭像/暱稱，或散布未經證實的伺服器假消息。</p>
             </div>
-            <div class="role-section" style="border-left-color: #e74c3c;" id="r-5"><h3 style="color:#e74c3c; margin-top:0;">五、 爭議解決與管理員權限</h3>
+            <div class="role-section"><h3>五、 爭議解決與管理員權限</h3>
                 <p><b>違規處分機制：</b>管理團隊將依據違規程度執行處分，流程包含：口頭警告、暫時禁言（Time Out）、強制踢出（Kick）或永久封鎖（Ban）。</p>
                 <p><b>最終解釋權：</b>伺服器管理團隊保有刪除違規訊息、調整規則及最終解釋規範的權利。</p>
             </div>`,
-        privacy: `<div class="privacy-container" style="line-height: 1.8; color: var(--text-color);">
-                <div style="text-align: center; margin-bottom: 40px;"><h1 style="font-size: 2.5rem; font-weight: 700; letter-spacing: 1px; margin-bottom: 10px;">隱私權政策</h1><p style="color: var(--text-muted); font-size: 1rem;">最後更新日期：2026年4月18日</p></div>
-                <p style="font-size: 1.1rem; margin-bottom: 30px;">「遊戲吧 Players’ Tavern！」（以下簡稱「本基地」）非常重視且尊重您的隱私權。本隱私權政策旨在透明化我們如何處理、保護您的資訊，並明確告知您的權益。當您繼續使用本基地服務時，即表示您同意本政策所述之內容。</p>
-                <div class="privacy-section" style="margin-bottom: 35px;"><h2 style="font-size: 1.5rem; border-bottom: 1px solid var(--glass-border); padding-bottom: 10px; margin-bottom: 15px;">1. 資訊收集與使用範圍</h2>
-                    <p>本基地網站主要作為靜態資訊展示與社群導流平台，我們<b>絕對不會主動要求、攔截或收集</b>您的個人身分識別資訊。我們可能接觸到的非敏感性數據僅限於：</p>
-                    <ul style="padding-left: 20px; color: var(--text-muted);">
-                        <li><b>本地偏好設定（Local Storage）：</b> 當您選擇網站的主題或語言時，我們會將這些偏好儲存於您設備的本地瀏覽器中。這僅存在於您的設備，我們無法在伺服器端存取。</li>
-                        <li><b>定位資訊（Geolocation）：</b> 首次進入時僅用於判斷您的語系以切換中英文，此數據即用即棄，絕不回傳或儲存。</li>
-                        <li><b>Discord API 數據：</b> 為了顯示社群狀態，本網站透過 Discord 官方 Widget API 獲取公開的線上狀態。</li>
-                    </ul>
-                </div>
-                <div class="privacy-section" style="margin-bottom: 35px;"><h2 style="font-size: 1.5rem; border-bottom: 1px solid var(--glass-border); padding-bottom: 10px; margin-bottom: 15px;">2. 第三方服務與對外連結</h2><p>本基地頁面包含指向外部服務的連結。當您點擊並離開本基地網域後，您的行為與資料傳輸將受該第三方平台之隱私政策規範。我們強烈建議您在提供任何個人資訊前，詳閱其專屬政策。</p></div>
-                <div class="privacy-section" style="margin-bottom: 35px;"><h2 style="font-size: 1.5rem; border-bottom: 1px solid var(--glass-border); padding-bottom: 10px; margin-bottom: 15px;">3. 資訊安全保護承諾</h2><p>本基地承諾採取合理且符合現代網頁技術標準的保護措施，以保護您的連線安全。我們建議您在參與社群的公開頻道互動時，妥善保護自身隱私，避免洩漏敏感資訊。</p></div>
-                <div class="privacy-section" style="margin-bottom: 35px;"><h2 style="font-size: 1.5rem; border-bottom: 1px solid var(--glass-border); padding-bottom: 10px; margin-bottom: 15px;">4. 政策之修訂與生效</h2><p>因應法律規範變更或服務調整，我們保留修改本政策之權利。重大變更將透過網站或 Discord 進行通知。若您繼續使用本服務，即視為您已接受修改後之政策條文。</p></div>
-                <div class="privacy-section" style="margin-bottom: 35px;"><h2 style="font-size: 1.5rem; border-bottom: 1px solid var(--glass-border); padding-bottom: 10px; margin-bottom: 15px;">5. 您的權利與資料保留</h2><p>由於我們不收集您的個人帳號資料，因此無涉及伺服器端資料刪除請求之問題。您可隨時透過瀏覽器設定或網站設定清除 LocalStorage，以重置您的本地偏好與紀錄。若您對隱私政策有任何疑問，歡迎透過開票系統聯繫管理團隊。</p></div>
+        privacy: `<h1>隱私權政策</h1><p style="text-align:center;">最後更新日期：2026年4月18日</p>
+            <div style="margin-top: 50px;">
+                <p>「遊戲吧 Players’ Tavern！」（以下簡稱「本基地」）非常重視且尊重您的隱私權。本隱私權政策旨在透明化我們如何處理、保護您的資訊，並明確告知您的權益。當您繼續使用本基地服務時，即表示您同意本政策所述之內容。</p>
+                <h2>1. 資訊收集與使用範圍</h2>
+                <p>本基地網站主要作為靜態資訊展示與社群導流平台，我們<b>絕對不會主動要求、攔截或收集</b>您的個人身分識別資訊。我們可能接觸到的非敏感性數據僅限於：</p>
+                <ul style="padding-left: 20px;">
+                    <li><b>本地偏好設定（Local Storage）：</b> 當您選擇網站的主題或語言時，我們會將這些偏好儲存於您設備的本地瀏覽器中。這僅存在於您的設備，我們無法在伺服器端存取。</li>
+                    <li><b>Discord API 數據：</b> 為了顯示社群狀態，本網站透過 Discord 官方 Widget API 獲取公開的線上狀態。</li>
+                </ul>
+                <h2>2. 第三方服務與對外連結</h2><p>本基地頁面包含指向外部服務的連結。當您點擊並離開本基地網域後，您的行為與資料傳輸將受該第三方平台之隱私政策規範。我們強烈建議您在提供任何個人資訊前，詳閱其專屬政策。</p>
+                <h2>3. 資訊安全保護承諾</h2><p>本基地承諾採取合理且符合現代網頁技術標準的保護措施，以保護您的連線安全。我們建議您在參與社群的公開頻道互動時，妥善保護自身隱私，避免洩漏敏感資訊。</p>
+                <h2>4. 政策之修訂與生效</h2><p>因應法律規範變更或服務調整，我們保留修改本政策之權利。重大變更將透過網站或 Discord 進行通知。若您繼續使用本服務，即視為您已接受修改後之政策條文。</p>
+                <h2>5. 您的權利與資料保留</h2><p>由於我們不收集您的個人帳號資料，因此無涉及伺服器端資料刪除請求之問題。您可隨時透過瀏覽器設定或網站設定清除 LocalStorage，以重置您的本地偏好與紀錄。若您對隱私政策有任何疑問，歡迎透過開票系統聯繫管理團隊。</p>
             </div>`,
-        suggest: `<h1>💡 修改建議與服務資訊</h1><p>我們致力於打造更好的遊戲社群。若您有任何建議或遇到問題，歡迎聯繫：</p>
-            <div class="role-section"><p>📧 <b>聯絡信箱：</b> <span style="color:var(--discord-blue); font-weight:bold;">lianyuqing169@gmail.com</span> <button class="copy-btn" onclick="copyText('lianyuqing169@gmail.com')">複製</button></p>
-                <hr style="margin: 10px 0; opacity: 0.1;"><p>🕒 <b>管理者上線服務時間：</b></p>
-                <ul style="margin-top:5px;"><li><b>假日 (六、日) 與連續假期：</b> 早上 11:00 - 晚上 8:00</li><li><b>平日 (週一至週五)：</b> 下午 5:00 - 晚上 8:00</li></ul>
-            </div><p style="font-size: 0.9rem; color: var(--text-muted);">* 建議來信時附上您的 Discord ID 以及具體的建議描述，以便我們更快處理。</p>`,
-        terms: `<h1>📝 使用條款 (Terms of Use)</h1><p>歡迎您訪問「遊戲吧 Players’ Tavern！」（以下簡稱「本基地」）。當您瀏覽或使用本網站及相關社群服務時，即表示您已充分閱讀、瞭解並同意接受本使用條款之所有內容。</p>
-            <h3>1. 服務之提供與修改</h3><p>本基地致力於提供穩定、友善的遊戲交流平台。我們保留隨時修改、暫停或永久終止網站服務（或其任何部分）之權利。</p>
-            <h3>2. 使用者行為與責任</h3><p>使用者在使用本基地及其附屬 Discord 伺服器與 Minecraft 伺服器時，必須遵守相關的「社群規範」。禁止利用本平台進行任何非法、侵權、散佈惡意軟體、騷擾他人或破壞系統穩定的行為。</p>
-            <h3>3. 帳號與安全性</h3><p>透過第三方平台（如 Discord 或 Minecraft）登入本基地社群之使用者，應妥善保管其帳號與密碼。</p>
-            <h3>4. 免責聲明</h3><p>本網站按「現狀（As is）」及「現有（As available）」之基礎提供服務。我們不保證服務將不受干擾、及時提供、安全可靠或免於出錯。</p>
-            <h3>5. 條款之更新</h3><p>我們保留隨時修訂本「使用條款」之權利。修訂後的條款將於本網站公佈後立即生效。</p>`,
-        news: `<h1 style="text-align:center; padding:50px 0; color:var(--text-muted);">目前暫無最新公告內容</h1>`,
-        legal: `<h1 style="text-align:center; padding:50px 0; color:var(--text-muted);">目前暫無法律聲明內容</h1>`
+        suggest: `<h1>修改建議與服務資訊</h1><p style="text-align:center;">我們致力於打造更好的遊戲社群。若您有任何建議或遇到問題，歡迎聯繫：</p>
+            <div class="role-section" style="margin-top: 50px;">
+                <p>📧 <b>聯絡信箱：</b> <strong>lianyuqing169@gmail.com</strong> <button class="copy-btn" onclick="copyText('lianyuqing169@gmail.com')" style="margin-top:0; margin-left: 10px;">複製</button></p>
+                <hr style="border: none; border-top: 1px solid var(--border); margin: 30px 0;">
+                <p>🕒 <b>管理者上線服務時間：</b></p>
+                <ul style="margin-top:15px; line-height: 2;">
+                    <li><b>假日 (六、日) 與連續假期：</b> 早上 11:00 - 晚上 8:00</li>
+                    <li><b>平日 (週一至週五)：</b> 下午 5:00 - 晚上 8:00</li>
+                </ul>
+            </div><p style="font-size: 0.9rem;">* 建議來信時附上您的 Discord ID 以及具體的建議描述，以便我們更快處理。</p>`,
+        terms: `<h1>使用條款 (Terms of Use)</h1><p style="text-align:center;">歡迎您訪問「遊戲吧 Players’ Tavern！」。當您瀏覽或使用本網站時，即表示您同意接受本條款。</p>
+            <div style="margin-top: 50px;">
+                <h2>1. 服務之提供與修改</h2><p>本基地致力於提供穩定、友善的遊戲交流平台。我們保留隨時修改、暫停或永久終止網站服務（或其任何部分）之權利。</p>
+                <h2>2. 使用者行為與責任</h2><p>使用者在使用本基地及其附屬 Discord 伺服器與 Minecraft 伺服器時，必須遵守相關的「社群規範」。禁止利用本平台進行任何非法、侵權、散佈惡意軟體、騷擾他人或破壞系統穩定的行為。</p>
+                <h2>3. 帳號與安全性</h2><p>透過第三方平台（如 Discord 或 Minecraft）登入本基地社群之使用者，應妥善保管其帳號與密碼。</p>
+                <h2>4. 免責聲明</h2><p>本網站按「現狀」及「現有」之基礎提供服務。我們不保證服務將不受干擾、安全可靠或免於出錯。</p>
+                <h2>5. 條款之更新</h2><p>我們保留隨時修訂本「使用條款」之權利。修訂後的條款將於本網站公佈後立即生效。</p>
+            </div>`,
+        news: `<h1 style="text-align:center; padding:100px 0; color:var(--text-muted); font-family: var(--font-sans); font-weight: 400;">目前暫無最新公告內容</h1>`,
+        legal: `<h1 style="text-align:center; padding:100px 0; color:var(--text-muted); font-family: var(--font-sans); font-weight: 400;">目前暫無法律聲明內容</h1>`
     };
 
-    const contentData_en = {
-        boost: `<div style="text-align: center; margin-bottom: 30px;"><h1 style="color: #f47fff; text-shadow: 0 0 15px rgba(244, 127, 255, 0.4);">💎 Server Boosters</h1><p style="color: var(--text-muted);">Thank you to the following guardians for boosting Players’ Tavern! You make our community stronger.</p></div>
-            <div class="hof-grid">
-                <div class="hof-card boost-card"><img src="https://ui-avatars.com/api/?name=Dy&background=8B7355&color=fff&size=128" loading="lazy" class="hof-avatar boost-avatar" alt="Dy"><h3 style="margin: 5px 0;">Dy</h3><p class="hof-id">dyson_2011</p><div><span class="role-tag" style="background:#f47fff; color:white; text-shadow:none;">Server Booster</span></div></div>
-                <div class="hof-card boost-card"><img src="https://ui-avatars.com/api/?name=鬼鬼&background=333&color=fff&size=128" loading="lazy" class="hof-avatar boost-avatar" alt="鬼鬼"><h3 style="margin: 5px 0;">Ghost</h3><p class="hof-id">xiao.</p><div><span class="role-tag" style="background:#f47fff; color:white; text-shadow:none;">Server Booster</span></div></div>
-                <div class="hof-card boost-card"><img src="https://ui-avatars.com/api/?name=Bobo&background=87CEEB&color=fff&size=128" loading="lazy" class="hof-avatar boost-avatar" alt="Tiny Bobo"><h3 style="margin: 5px 0;">Tiny Bobo</h3><p class="hof-id">bobo7755137_29015</p><div><span class="role-tag" style="background:#f47fff; color:white; text-shadow:none;">Server Booster</span></div></div>
-            </div>`,
-        channel: `<div style="text-align: center; margin-bottom: 30px;">
-                <h1 style="color: var(--discord-blue); text-shadow: 0 0 15px var(--glow-color);" data-i18n="navChannel">Channel Info</h1>
-            </div>
-            <div class="role-section" style="text-align: center; padding: 40px 20px; border-left-color: var(--discord-blue); display: flex; flex-direction: column; align-items: center;">
-                <h2 style="color: var(--text-color); font-size: clamp(1.8rem, 5vw, 2.5rem); margin-bottom: 10px; text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);">Summer Video, Coming Soon</h2>
-                <p style="color: var(--text-muted); font-size: 1.1rem; margin-top: 0; margin-bottom: 30px;">Official channel launch date: Summer, July 2026</p>
-                <div style="width: 100%; max-width: 500px; border-radius: 15px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.5); border: 1px solid var(--glass-border);">
-                    <img src="https://github.com/Dyson201101010/players-tavern/blob/main/assets/9f94d003-c298-4ef7-a640-f05ac1e73be0_upscayl_5x_upscayl-standard-4x.png?raw=true" alt="Summer Video, Coming Soon" style="width: 100%; height: auto; display: block;" onerror="this.src='https://placehold.co/600x800/1a1a1a/d4af37?text=Summer+Video+Coming+Soon'">
-                </div>
-            </div>`,
-        roles: `<h1>👤 Server Roles</h1>
-            <div class="role-section"><h3 style="color:var(--discord-blue); margin-top:0;">【Members】 — Welcome Adventurers</h3><p><span class="role-tag">@Traveler</span> : Core members, standard role after verification.</p><p><span class="role-tag">@Mobile</span> <span class="role-tag">@Console</span> <span class="role-tag">@PC</span> : Device tags to find gaming buddies.</p><p><span class="role-tag" style="background:#ff0000; text-shadow:none;">@YouTube</span> : Verified creator. Req: 500 subs, 100 avg views.</p></div>
-            <div class="role-section"><h3 style="color:var(--discord-blue); margin-top:0;">【Notifications】 — Stay Updated</h3><p><span class="role-tag">@Announcements</span> : Major server updates, feature changes, or rule adjustments.</p><p><span class="role-tag">@Votes</span> : Participate in community decisions.</p><p><span class="role-tag">@Giveaways</span> : Exclusive notifications for welfare distributions.</p></div>
-            <div class="role-section"><h3 style="color:var(--discord-blue); margin-top:0;">【Management】 — Guardians of Order</h3><p><span class="role-tag">@Mod</span> : Frontline moderation, chat cleanup, and initial dispute handling.</p><p><span class="role-tag">@Admin</span> : High-level permissions, server structure optimization, bots, and major punishments.</p><p><span class="role-tag">@COO (HR)</span> : Staff recruitment, app reviews, dispute mediation, and rules optimization.</p></div>
-            <div class="role-section"><h3 style="color:var(--discord-blue); margin-top:0;">【Honors】 — Thank You</h3><p><span class="role-tag" style="background:#faa61a; color:black; text-shadow:none;">@Sugar Daddy</span> : Exclusive honor for server boosters or giveaway donors.</p></div>`,
-        ticket: `<h1>🎫 Ticket System</h1>
-            <div style="background:rgba(237, 66, 69, 0.05); border-left: 5px solid var(--ticket-red); padding: 25px; border-radius: 12px; backdrop-filter:blur(5px);">
-                <h3 style="color:var(--ticket-red); margin-top:0;">💡 How to use Tickets</h3>
-                <p>Welcome to the <b>Ticket</b> channel! Use this for:</p>
-                <h4 style="margin-bottom:5px;">1. Unban / Unmute Appeals</h4>
-                <p style="font-size:0.9rem; color:var(--text-muted);">Provide time, channel, context, and why it was a mistake.</p>
-                <h4 style="margin-bottom:5px;">2. User Reports</h4>
-                <p style="font-size:0.9rem; color:var(--text-muted);">Provide the violator's ID, time, channel, and screenshots of the violation.</p>
-                <p style="font-weight:bold; margin-top:15px; color:var(--ticket-red);">⚠️ Do not abuse the system. Abusers will be punished. Reporters remain anonymous.</p>
-            </div>`,
-        rules: `<h1 style="color:var(--discord-blue);">📜 Community Rules</h1><p style="color:var(--text-muted);">(Updated: 2026/03/18)</p>
-            <div class="toc-menu"><a href="#r-1">1. Conduct</a><a href="#r-2">2. Copyright</a><a href="#r-3">3. Voice</a><a href="#r-4">4. Anti-Spam</a><a href="#r-5">5. Punishments</a></div>
-            <div class="role-section" style="border-left-color: #f1c40f;" id="r-1"><h3 style="margin-top:0;">1. Core Conduct & Zero Tolerance</h3>
-                <p><b>Respect:</b> No hate speech, discrimination, personal attacks, or bullying. Zero tolerance for attacks on race, gender, orientation, or religion. (Swearing to vent is okay, but not at others)</p>
-                <p><b>No Doxxing:</b> Absolutely no sharing or threatening to share real names, photos, addresses, or personal info.</p>
-                <p><b>No NSFW:</b> Strictly no pornographic, extremely violent, gory, or child-endangering content.</p>
-                <p><b>No Politics/Controversies:</b> Keep the gaming community pure. Avoid intense political or religious debates.</p>
-            </div>
-            <div class="role-section" style="border-left-color: #f1c40f;" id="r-2"><h3 style="margin-top:0;">2. Gaming & Copyright</h3><p><b>Respect IP:</b> No sharing pirated game links, cracks, unauthorized server files, or infringing content.</p></div>
-            <div class="role-section" style="border-left-color: #f1c40f;" id="r-3"><h3 style="margin-top:0;">3. Channels & Voice Chat</h3>
-                <p><b>Etiquette:</b> Use correct channels. Use LFG channels to find buddies. Do not abuse @everyone or @here.</p>
-                <p><b>Voice Order:</b> Maintain basic manners. No voice changers to troll, mic spamming, or ear-rape noises.</p>
-                <p><b>Third-party Tools:</b> Ask permission before using music bots or soundpads in voice channels.</p>
-            </div>
-            <div class="role-section" style="border-left-color: #f1c40f;" id="r-4"><h3 style="margin-top:0;">4. Anti-Spam & Ads</h3>
-                <p><b>No Spamming:</b> No flooding, meaningless short bursts, or sticker/GIF spam.</p>
-                <p><b>Ad Restrictions:</b> No unauthorized commercial ads, Discord invites, or channel promos (including in DMs).</p>
-                <p><b>No Impersonation:</b> Do not impersonate admins, use confusing avatars/names, or spread fake server news.</p>
-            </div>
-            <div class="role-section" style="border-left-color: #e74c3c;" id="r-5"><h3 style="color:#e74c3c; margin-top:0;">5. Dispute Resolution & Admin Power</h3>
-                <p><b>Punishments:</b> Admins issue punishments based on severity: Verbal Warning, Time Out, Kick, Ban.</p>
-                <p><b>Final Say:</b> The Admin team reserves the right to delete messages, adjust rules, and holds the final interpretation of the rules.</p>
-            </div>`,
-        privacy: `<div class="privacy-container" style="line-height: 1.8; color: var(--text-color);">
-                <div style="text-align: center; margin-bottom: 40px;"><h1 style="font-size: 2.5rem; font-weight: 700; letter-spacing: 1px; margin-bottom: 10px;">Privacy Policy</h1><p style="color: var(--text-muted); font-size: 1rem;">Last Updated: April 18, 2026</p></div>
-                <p style="font-size: 1.1rem; margin-bottom: 30px;">"Players’ Tavern!" respects your privacy. This policy aims to be transparent about how we handle your information. By using our service, you agree to this policy.</p>
-                <div class="privacy-section" style="margin-bottom: 35px;"><h2 style="font-size: 1.5rem; border-bottom: 1px solid var(--glass-border); padding-bottom: 10px; margin-bottom: 15px;">1. Data Collection & Scope</h2>
-                    <p>This website is a static portal. We <b>never actively request, intercept, or collect</b> personal identification data. Non-sensitive data we interact with includes:</p>
-                    <ul style="padding-left: 20px; color: var(--text-muted);">
-                        <li><b>Local Storage:</b> Preferences (theme/language) are saved locally on your device. We do not access this on our servers.</li>
-                        <li><b>Geolocation:</b> Used ONCE upon first visit to determine language. Data is discarded immediately and never stored.</li>
-                        <li><b>Discord API:</b> We use the official Discord Widget API to display public online status. We cannot access private chats.</li>
-                    </ul>
-                </div>
-                <div class="privacy-section" style="margin-bottom: 35px;"><h2 style="font-size: 1.5rem; border-bottom: 1px solid var(--glass-border); padding-bottom: 10px; margin-bottom: 15px;">2. Third-Party Links</h2><p>Our site contains links to external services. Once you leave our domain, your data is governed by their privacy policies. We are not liable for third-party actions.</p></div>
-                <div class="privacy-section" style="margin-bottom: 35px;"><h2 style="font-size: 1.5rem; border-bottom: 1px solid var(--glass-border); padding-bottom: 10px; margin-bottom: 15px;">3. Security</h2><p>We adopt reasonable web standard protections. We advise you to protect your own privacy when chatting in public channels.</p></div>
-                <div class="privacy-section" style="margin-bottom: 35px;"><h2 style="font-size: 1.5rem; border-bottom: 1px solid var(--glass-border); padding-bottom: 10px; margin-bottom: 15px;">4. Amendments</h2><p>We reserve the right to modify this policy. Major changes will be announced on the website or Discord.</p></div>
-                <div class="privacy-section" style="margin-bottom: 35px;"><h2 style="font-size: 1.5rem; border-bottom: 1px solid var(--glass-border); padding-bottom: 10px; margin-bottom: 15px;">5. User Rights & Data Retention</h2><p>Since we do not collect personal account data, there are no server-side data deletion requests involved. You can clear your LocalStorage at any time via your browser settings or website settings to reset local preferences. For any privacy concerns, please open a ticket.</p></div>
-            </div>`,
-        suggest: `<h1>💡 Feedback & Support</h1><p>We strive to build a better community. Contact us for any issues:</p>
-            <div class="role-section"><p>📧 <b>Email:</b> <span style="color:var(--discord-blue); font-weight:bold;">lianyuqing169@gmail.com</span> <button class="copy-btn" onclick="copyText('lianyuqing169@gmail.com')">Copy</button></p>
-                <hr style="margin: 10px 0; opacity: 0.1;"><p>🕒 <b>Admin Service Hours:</b></p>
-                <ul style="margin-top:5px;"><li><b>Weekends/Holidays:</b> 11:00 AM - 8:00 PM (UTC+8)</li><li><b>Weekdays:</b> 5:00 PM - 8:00 PM (UTC+8)</li></ul>
-            </div><p style="font-size: 0.9rem; color: var(--text-muted);">* Please include your Discord ID and detailed descriptions in your email.</p>`,
-        terms: `<h1>📝 Terms of Use</h1><p>Welcome to "Players’ Tavern!". By accessing our site and services, you fully understand and agree to these terms.</p>
-            <h3>1. Service Modification</h3><p>We reserve the right to modify, suspend, or terminate our services at any time without prior notice.</p>
-            <h3>2. User Responsibility</h3><p>Users must obey community rules. Illegal acts, infringement, malware, or harassment are strictly prohibited.</p>
-            <h3>3. Account Security</h3><p>Keep your Discord/Minecraft accounts secure. You are responsible for all actions under your account.</p>
-            <h3>4. Disclaimer</h3><p>Services are provided "As is". We do not guarantee uninterrupted or error-free service. Use at your own risk.</p>
-            <h3>5. Updates</h3><p>We reserve the right to amend these terms. Continued use implies acceptance.</p>`,
-        news: `<h1 style="text-align:center; padding:50px 0; color:var(--text-muted);">No recent announcements yet.</h1>`,
-        legal: `<h1 style="text-align:center; padding:50px 0; color:var(--text-muted);">Not affiliated with Mojang AB or Microsoft.</h1>`
-    };
-
-    // --- 新增：更細緻的滾動載入動畫 (Intersection Observer) ---
-    const revealObserver = new IntersectionObserver((entries, observer) => {
-        entries.forEach(entry => {
-            if(entry.isIntersecting) {
-                entry.target.classList.add('active');
-                observer.unobserve(entry.target); // 播放一次後取消觀察，避免重複閃爍
-            }
-        });
-    }, { root: null, rootMargin: '0px', threshold: 0.1 });
-
-    function observeReveals() {
-        document.querySelectorAll('.reveal').forEach(el => {
-            el.classList.remove('active'); // 確保重新綁定時是初始狀態
-            revealObserver.observe(el);
-        });
-    }
-
-    // --- 新增：導覽列縮小 & 回到頂部按鈕滾動監聽 ---
-    window.addEventListener('scroll', () => {
-        const nav = document.querySelector('nav');
-        const btt = document.getElementById('back-to-top');
-        
-        if (window.scrollY > 50) {
-            nav.classList.add('nav-scrolled');
-        } else {
-            nav.classList.remove('nav-scrolled');
-        }
-
-        if (window.scrollY > 300) {
-            btt.classList.add('show');
-        } else {
-            btt.classList.remove('show');
-        }
-    });
-
-    // --- 語言切換與 DOM 渲染 ---
-    function updateI18n() {
-        const d = translations[currentLang];
-        document.querySelectorAll('[data-i18n]').forEach(el => {
-            const key = el.getAttribute('data-i18n');
-            if(d[key]) el.innerHTML = d[key];
-        });
-
-        const activeSec = document.querySelector('.view-section.active').id;
-        if(activeSec !== 'home') {
-            const contentObj = currentLang === 'zh' ? contentData_zh : contentData_en;
-            if(contentObj[activeSec]) {
-                document.getElementById(`${activeSec}-area`).innerHTML = contentObj[activeSec];
-            }
-        }
-        renderHof();
-    }
-
+    // ==========================================
+    // 渲染與操作邏輯
+    // ==========================================
     function renderHof() {
         const hofArea = document.getElementById('hof-area');
         if(!hofArea) return;
         hofArea.innerHTML = '';
-        const data = currentLang === 'zh' ? hofData_zh : hofData_en;
-        data.forEach(member => {
+        hofData_zh.forEach(member => {
             hofArea.innerHTML += `
                 <div class="hof-card" onclick="openHofModal('${member.id}')">
                     <img src="${member.avatar}" loading="lazy" class="hof-avatar" alt="${member.name}">
-                    <h3 style="margin: 5px 0; font-size: 1.1rem;">${member.name}</h3>
+                    <h3 style="margin: 5px 0; font-size: 1.1rem; font-family: var(--font-sans);">${member.name}</h3>
                     <p class="hof-id">${member.id}</p>
-                    <div class="click-hint" style="font-size:0.85rem; margin-top:8px; color:var(--discord-blue); font-weight:bold;">${currentLang === 'zh' ? '點擊查看事蹟 ✨' : 'Click for info ✨'}</div>
                 </div>
             `;
         });
     }
 
-    function changeLang(lang) {
-        currentLang = lang;
-        localStorage.setItem('preferred-lang', lang);
-        updateI18n();
-        toggleModal('settings-modal');
-    }
-
-    async function detectLocation() {
-        if(localStorage.getItem('preferred-lang')) {
-            currentLang = localStorage.getItem('preferred-lang');
-            updateI18n();
-            return;
-        }
-        // 請求定位
-        if(navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(async (pos) => {
-                try {
-                    const lat = pos.coords.latitude;
-                    const lon = pos.coords.longitude;
-                    const res = await fetch(`https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${lat}&longitude=${lon}&localityLanguage=en`);
-                    const data = await res.json();
-                    const zhCountries = ['TW', 'CN', 'HK', 'MO', 'MY', 'SG'];
-                    if(zhCountries.includes(data.countryCode)) currentLang = 'zh';
-                    else currentLang = 'en';
-                    localStorage.setItem('preferred-lang', currentLang);
-                    updateI18n();
-                } catch(e) { currentLang='en'; localStorage.setItem('preferred-lang','en'); updateI18n(); }
-            }, () => { currentLang='en'; localStorage.setItem('preferred-lang','en'); updateI18n(); });
-        } else {
-            currentLang='en'; localStorage.setItem('preferred-lang','en'); updateI18n();
-        }
-    }
-
-    // --- 複製與 Toast ---
     function copyText(text) {
         navigator.clipboard.writeText(text).then(() => {
             const toast = document.getElementById("toast");
-            toast.innerText = translations[currentLang].toastCopied;
             toast.className = "show";
             setTimeout(() => { toast.className = toast.className.replace("show", ""); }, 3000);
         });
     }
 
-    // --- 導航與彈窗 ---
     function goTo(sectionId) {
         document.querySelectorAll('.view-section').forEach(sec => sec.classList.remove('active'));
         const target = document.getElementById(sectionId);
@@ -886,12 +618,10 @@
         window.scrollTo({ top: 0, behavior: 'smooth' });
         
         if(sectionId !== 'home') {
-            const contentObj = currentLang === 'zh' ? contentData_zh : contentData_en;
-            if(contentObj[sectionId]) document.getElementById(`${sectionId}-area`).innerHTML = contentObj[sectionId];
+            if(contentData_zh[sectionId]) {
+                document.getElementById(`${sectionId}-area`).innerHTML = contentData_zh[sectionId];
+            }
         }
-        
-        // 切換頁面後重新綁定動畫
-        setTimeout(() => observeReveals(), 100);
     }
 
     function toggleModal(modalId) {
@@ -908,8 +638,7 @@
     function closeModalOnBg(e, id) { if (e.target.id === id) toggleModal(id); }
 
     function openHofModal(memberId) {
-        const data = currentLang === 'zh' ? hofData_zh : hofData_en;
-        const member = data.find(m => m.id === memberId);
+        const member = hofData_zh.find(m => m.id === memberId);
         if(member) {
             document.getElementById('hof-modal-avatar').src = member.avatar;
             document.getElementById('hof-modal-name').innerText = member.name;
@@ -920,7 +649,6 @@
         }
     }
 
-    // --- 主題切換 ---
     function setTheme(themeName, isSystem = false) {
         document.body.setAttribute('data-theme', themeName);
         document.querySelectorAll('.theme-btn').forEach(btn => btn.classList.remove('active'));
@@ -932,7 +660,14 @@
             if (activeBtn) activeBtn.classList.add('active');
             localStorage.setItem('preferred-theme', themeName);
         }
+        
+        const dcIframe = document.getElementById('discord-widget-iframe');
+        if (dcIframe) {
+            const useLight = (themeName === 'light') || (isSystem && !window.matchMedia('(prefers-color-scheme: dark)').matches);
+            dcIframe.src = `https://discord.com/widget?id=1458066464194957448&theme=${useLight ? 'light' : 'dark'}`;
+        }
     }
+
     function setSystemTheme() {
         const isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
         setTheme(isDark ? 'dark' : 'light', true);
@@ -940,85 +675,28 @@
     window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
         if(localStorage.getItem('preferred-theme') === 'system') setTheme(e.matches ? 'dark' : 'light', true);
     });
+
     function resetWebsite() {
         localStorage.removeItem('preferred-theme');
         setTheme('dark');
         toggleModal('settings-modal');
         const toast = document.getElementById("toast");
-        toast.innerText = translations[currentLang].toastReset;
+        toast.innerText = "✅ 網站設定已重置！";
         toast.className = "show";
-        setTimeout(() => { toast.className = toast.className.replace("show", ""); }, 3000);
+        setTimeout(() => { toast.className = toast.className.replace("show", ""); toast.innerText = "✅ 已複製到剪貼簿！"; }, 3000);
     }
 
-    // --- Discord 滑動列邏輯 ---
-    function scrollDc(dir) {
-        const list = document.getElementById('dc-members-grid');
-        list.scrollBy({ left: dir * 150, behavior: 'smooth' });
-    }
+    window.addEventListener('scroll', () => {
+        const nav = document.querySelector('nav');
+        if (window.scrollY > 50) nav.classList.add('nav-scrolled');
+        else nav.classList.remove('nav-scrolled');
+    });
 
-    async function fetchDiscord() {
-        try {
-            const res = await fetch(`https://discord.com/api/guilds/${serverID}/widget.json`);
-            if (!res.ok) throw new Error();
-            const data = await res.json();
-            
-            document.getElementById('dc-skeleton').style.display = 'none';
-            document.getElementById('dc-content').style.display = 'block';
-            document.getElementById('dc-player-count').innerText = data.presence_count;
-            document.getElementById('dc-player-count').style.color = "var(--mc-green)";
-            
-            const membersEl = document.getElementById('dc-members-grid');
-            membersEl.innerHTML = '';
-            // 顯示全部在線成員
-            data.members.forEach(m => {
-                membersEl.innerHTML += `<img src="${m.avatar_url}" loading="lazy" class="dc-avatar" title="${m.username}" alt="${m.username}">`;
-            });
-
-            // 檢查是否溢出，顯示箭頭
-            if(membersEl.scrollWidth > membersEl.clientWidth) {
-                document.getElementById('dc-scroll-left').style.display = 'flex';
-                document.getElementById('dc-scroll-right').style.display = 'flex';
-            } else {
-                document.getElementById('dc-scroll-left').style.display = 'none';
-                document.getElementById('dc-scroll-right').style.display = 'none';
-            }
-        } catch (err) {
-            document.getElementById('dc-skeleton').style.display = 'none';
-            document.getElementById('dc-content').style.display = 'block';
-            document.getElementById('dc-content').innerHTML = `<p>${translations[currentLang].dcConnectFail}</p>`;
-        }
-    }
-
-    // --- 初始化 ---
     window.onload = () => {
         const savedTheme = localStorage.getItem('preferred-theme');
         if (savedTheme === 'system') { setSystemTheme(); } 
         else { setTheme(savedTheme || 'dark'); }
-
-        detectLocation();
-
-        const cursorGlow = document.getElementById('cursor-glow');
-        document.addEventListener('mousemove', (e) => {
-            requestAnimationFrame(() => { cursorGlow.style.left = e.clientX + 'px'; cursorGlow.style.top = e.clientY + 'px'; });
-        });
-
-        // 觸發載入動畫
-        observeReveals();
-        
-        fetchDiscord();
-        setInterval(fetchDiscord, 60000); 
-
-        // 綁定視窗大小改變事件重新檢查滾動箭頭
-        window.addEventListener('resize', () => {
-            const el = document.getElementById('dc-members-grid');
-            if(el.scrollWidth > el.clientWidth) {
-                document.getElementById('dc-scroll-left').style.display = 'flex';
-                document.getElementById('dc-scroll-right').style.display = 'flex';
-            } else {
-                document.getElementById('dc-scroll-left').style.display = 'none';
-                document.getElementById('dc-scroll-right').style.display = 'none';
-            }
-        });
+        renderHof();
     };
 </script>
 </body>
