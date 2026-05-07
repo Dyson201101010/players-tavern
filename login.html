@@ -1,1 +1,140 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>會員系統 | 遊戲吧 Players’ Tavern！</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #5865F2;
+            --bg: #0a0a0a;
+        }
+        body {
+            margin: 0;
+            font-family: 'Noto Sans TC', sans-serif;
+            background: var(--bg);
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+        }
+        /* 延用你的毛玻璃風格 */
+        .auth-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            padding: 40px;
+            border-radius: 24px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            width: 100%;
+            max-width: 360px;
+            text-align: center;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+        }
+        h2 { margin-bottom: 30px; font-weight: 700; }
+        input {
+            width: 100%;
+            padding: 14px;
+            margin: 8px 0;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            color: white;
+            box-sizing: border-box;
+            outline: none;
+            transition: 0.3s;
+        }
+        input:focus { border-color: var(--primary); background: rgba(255, 255, 255, 0.12); }
+        button {
+            width: 100%;
+            padding: 14px;
+            margin-top: 20px;
+            border-radius: 12px;
+            border: none;
+            background: var(--primary);
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        button:hover { opacity: 0.9; transform: translateY(-2px); }
+        .switch-btn {
+            background: transparent;
+            margin-top: 10px;
+            color: #aaa;
+            font-size: 0.9rem;
+            cursor: pointer;
+            border: none;
+        }
+        #message { margin-top: 15px; font-size: 0.85rem; color: #ff4d4d; }
+    </style>
+</head>
+<body>
 
+    <div class="auth-card">
+        <h2 id="auth-title">登入遊戲吧</h2>
+        <input type="email" id="email" placeholder="電子郵件">
+        <input type="password" id="password" placeholder="密碼">
+        <button id="main-btn">登入</button>
+        <button class="switch-btn" id="switch-mode">沒有帳號？立即註冊</button>
+        <div id="message"></div>
+    </div>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+        import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+
+        // 這裡放入你提供的 Config
+        const firebaseConfig = {
+            apiKey: "AIzaSyDNXgRe2_CmCFk1n7jvx6HvtRLlheecbDY",
+            authDomain: "players-tavern-web.firebaseapp.com",
+            projectId: "players-tavern-web",
+            storageBucket: "players-tavern-web.firebasestorage.app",
+            messagingSenderId: "674171547120",
+            appId: "1:674171547120:web:2b0d3cb5c576857b818135",
+            measurementId: "G-S34P8KD6SX"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+
+        let isLoginMode = true;
+        const authTitle = document.getElementById('auth-title');
+        const mainBtn = document.getElementById('main-btn');
+        const switchBtn = document.getElementById('switch-mode');
+        const msgDiv = document.getElementById('message');
+
+        // 切換登入與註冊模式
+        switchBtn.onclick = () => {
+            isLoginMode = !isLoginMode;
+            authTitle.innerText = isLoginMode ? "登入遊戲吧" : "註冊帳號";
+            mainBtn.innerText = isLoginMode ? "登入" : "註冊";
+            switchBtn.innerText = isLoginMode ? "沒有帳號？立即註冊" : "已有帳號？返回登入";
+        };
+
+        mainBtn.onclick = async () => {
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            msgDiv.innerText = "處理中...";
+
+            try {
+                if (isLoginMode) {
+                    await signInWithEmailAndPassword(auth, email, password);
+                    msgDiv.style.color = "#4dff4d";
+                    msgDiv.innerText = "登入成功！正在跳轉...";
+                    setTimeout(() => window.location.href = "index.html", 1000);
+                } else {
+                    await createUserWithEmailAndPassword(auth, email, password);
+                    alert("註冊成功！現在可以登入了");
+                    location.reload();
+                }
+            } catch (error) {
+                msgDiv.style.color = "#ff4d4d";
+                msgDiv.innerText = "錯誤: " + error.message;
+            }
+        };
+    </script>
+</body>
+</html>
